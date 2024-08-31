@@ -15,6 +15,7 @@ public class Main extends PApplet {
 
     public void draw(){
         background(0);
+        Input.getInput();
         Solver.update(0.01);
         Renderer.render();
     }

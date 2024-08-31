@@ -11,7 +11,7 @@ public class VerletObject {
     public Vector2D positionOld;
     public Vector2D acceleration = Vector2D.ZERO;
 
-    public double radius = 30;
+    public double radius = 10;
 
     public VerletObject(double x, double y) {
         positionCurrent = new Vector2D(x, y);
