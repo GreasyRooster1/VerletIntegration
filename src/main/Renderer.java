@@ -1,4 +1,6 @@
-import processing.core.PConstants;
+package main;
+
+import main.Constraints.BorderConstraint;
 
 public class Renderer {
     public static void render(){

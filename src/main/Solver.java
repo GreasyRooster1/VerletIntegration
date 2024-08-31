@@ -1,3 +1,6 @@
+package main;
+
+import main.Constraints.BorderConstraint;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
 import static processing.core.PApplet.append;
@@ -5,13 +8,21 @@ import static processing.core.PApplet.println;
 
 public class Solver {
     public static VerletObject[] objects = {};
+    public static Constraint[] constraints = {};
 
     public static int subSteps = 4;
 
     public static Vector2D gravity = new Vector2D(0, 1000);
 
     public static void newObject(double x, double y){
-        objects = (VerletObject[]) append(Solver.objects,new VerletObject(x,y));
+        objects = (VerletObject[]) append(objects,new VerletObject(x,y));
+    }
+    public static void newConstraint(Constraint c){
+        constraints = (Constraint[]) append(constraints,c);
+    }
+
+    static void setupConstraints(){
+        newConstraint(new BorderConstraint());
     }
 
     static void update(double dt){
@@ -38,11 +49,8 @@ public class Solver {
 
     public static void applyConstraint(){
         for (VerletObject obj:objects){
-            Vector2D toObj = obj.positionCurrent.subtract(BorderConstraint.center);
-            double dist = toObj.getNorm();
-            if(dist > BorderConstraint.radius-obj.radius){
-                Vector2D n = new Vector2D(toObj.getX()/dist, toObj.getY()/dist);
-                obj.positionCurrent = BorderConstraint.center.add(n.scalarMultiply(BorderConstraint.radius-obj.radius));
+            for(Constraint c:constraints){
+                c.apply(obj);
             }
         }
     }

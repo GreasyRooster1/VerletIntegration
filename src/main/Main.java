@@ -1,6 +1,6 @@
-import processing.core.PApplet;
+package main;
 
-import javax.swing.*;
+import processing.core.PApplet;
 
 public class Main extends PApplet {
     public static Main app;
@@ -12,6 +12,7 @@ public class Main extends PApplet {
 
     public void setup(){
         app = this;
+        Solver.setupConstraints();
     }
 
     public void draw(){
@@ -33,7 +34,7 @@ public class Main extends PApplet {
 
 
     public static void main(String[] args) {
-        PApplet.runSketch(new String[] { "Main" },  new Main());
+        PApplet.runSketch(new String[] { "main.Main" },  new Main());
     }
 
     public void ellipse(double x,double y,double r){

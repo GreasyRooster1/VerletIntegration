@@ -1,3 +1,5 @@
+package main;
+
 import static processing.core.PApplet.sin;
 import static processing.core.PConstants.PI;
 
