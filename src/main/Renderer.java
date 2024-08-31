@@ -1,6 +1,6 @@
 package main;
 
-import main.Constraints.BorderConstraint;
+import main.Constraints.CircularBorderConstraint;
 
 public class Renderer {
     public static void render(){
@@ -18,6 +18,6 @@ public class Renderer {
 
     public static void renderConstraint(){
         Main.app.fill(127);
-        Main.app.ellipse(BorderConstraint.center.getX(),BorderConstraint.center.getY(),BorderConstraint.radius);
+        Main.app.ellipse(CircularBorderConstraint.center.getX(), CircularBorderConstraint.center.getY(), CircularBorderConstraint.radius);
     }
 }
