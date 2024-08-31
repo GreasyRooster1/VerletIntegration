@@ -13,7 +13,7 @@ public class VerletObject {
 
     public int color;
 
-    public double radius = 5;
+    public double radius = 10;
 
     public VerletObject(double x, double y) {
         positionCurrent = new Vector2D(x, y);
