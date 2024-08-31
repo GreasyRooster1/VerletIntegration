@@ -1,17 +1,23 @@
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
+import java.util.UUID;
+
 import static processing.core.PApplet.println;
 
 public class VerletObject {
+    public final UUID ID;
+
     public Vector2D positionCurrent;
     public Vector2D positionOld;
     public Vector2D acceleration = Vector2D.ZERO;
 
-    public double radius = 15;
+    public double radius = 30;
 
     public VerletObject(double x, double y) {
         positionCurrent = new Vector2D(x, y);
         positionOld = new Vector2D(x, y);
+
+        ID = UUID.randomUUID();
     }
 
     public void updatePosition(double dt){

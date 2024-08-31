@@ -9,6 +9,7 @@ public class Solver {
 
     static void update(double dt){
         applyGravity();
+        solveCollisions();
         applyConstraint();
         updatePositions(dt);
     }
@@ -32,6 +33,25 @@ public class Solver {
             if(dist > BorderConstraint.radius-obj.radius){
                 Vector2D n = new Vector2D(toObj.getX()/dist, toObj.getY()/dist);
                 obj.positionCurrent = BorderConstraint.center.add(n.scalarMultiply(BorderConstraint.radius-obj.radius));
+            }
+        }
+    }
+
+    public static void solveCollisions(){
+        for (VerletObject obj1:objects) {
+            for (VerletObject obj2 : objects) {
+                if(obj1.ID.equals(obj2.ID)){
+                    continue;
+                }
+                Vector2D collisionAxis = obj1.positionCurrent.subtract(obj2.positionCurrent);
+                double dist = collisionAxis.getNorm();
+                if(dist < obj1.radius+obj2.radius){
+                    Vector2D n =  new Vector2D(collisionAxis.getX()/dist, collisionAxis.getY()/dist);
+                    double delta = obj1.radius+obj2.radius - dist;
+                    obj1.positionCurrent = obj1.positionCurrent.add(n.scalarMultiply(delta).scalarMultiply(.5));
+                    obj2.positionCurrent = obj2.positionCurrent.subtract(n.scalarMultiply(delta).scalarMultiply(.5));
+
+                }
             }
         }
     }

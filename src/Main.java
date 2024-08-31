@@ -12,7 +12,7 @@ public class Main extends PApplet {
     public void setup(){
         app = this;
         Solver.objects = (VerletObject[]) append(Solver.objects,new VerletObject(75,250));
-        Solver.objects = (VerletObject[]) append(Solver.objects,new VerletObject(415,250));
+        Solver.objects = (VerletObject[]) append(Solver.objects,new VerletObject(350,350));
     }
 
     public void draw(){
