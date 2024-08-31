@@ -11,11 +11,15 @@ public class VerletObject {
     public Vector2D positionOld;
     public Vector2D acceleration = Vector2D.ZERO;
 
+    public int color;
+
     public double radius = 5;
 
     public VerletObject(double x, double y) {
         positionCurrent = new Vector2D(x, y);
         positionOld = new Vector2D(x, y);
+
+        color = Color.getRainbow(Main.app.frameCount/100f);
 
         ID = UUID.randomUUID();
     }

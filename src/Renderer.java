@@ -1,3 +1,5 @@
+import processing.core.PConstants;
+
 public class Renderer {
     public static void render(){
         renderConstraint();
@@ -6,7 +8,7 @@ public class Renderer {
 
     public static void renderVerletObjects(){
         for (VerletObject obj:Solver.objects){
-            Main.app.fill(255);
+            Main.app.fill(obj.color);
             Main.app.noStroke();
             Main.app.ellipse(obj.positionCurrent.getX(),obj.positionCurrent.getY(),obj.radius);
         }
