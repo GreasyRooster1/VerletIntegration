@@ -4,8 +4,14 @@ import main.Constraints.CircularBorderConstraint;
 
 public class Renderer {
     public static void render(){
-        renderConstraint();
+        renderConstraints();
         renderVerletObjects();
+    }
+
+    private static void renderConstraints() {
+        for(Constraint c:Solver.constraints){
+            c.render();
+        }
     }
 
     public static void renderVerletObjects(){
@@ -14,10 +20,5 @@ public class Renderer {
             Main.app.noStroke();
             Main.app.ellipse(obj.positionCurrent.getX(),obj.positionCurrent.getY(),obj.radius);
         }
-    }
-
-    public static void renderConstraint(){
-        Main.app.fill(127);
-        Main.app.ellipse(CircularBorderConstraint.center.getX(), CircularBorderConstraint.center.getY(), CircularBorderConstraint.radius);
     }
 }

@@ -1,6 +1,7 @@
 package main;
 
 import main.Constraints.CircularBorderConstraint;
+import main.Constraints.WindowBorderConstraint;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
 import static processing.core.PApplet.append;
@@ -22,7 +23,7 @@ public class Solver {
     }
 
     static void setupConstraints(){
-        newConstraint(new CircularBorderConstraint());
+        newConstraint(new WindowBorderConstraint());
     }
 
     static void update(double dt){
