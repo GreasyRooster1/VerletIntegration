@@ -6,6 +6,8 @@ import static processing.core.PApplet.println;
 public class Solver {
     public static VerletObject[] objects = {};
 
+    public static int subSteps = 4;
+
     public static Vector2D gravity = new Vector2D(0, 1000);
 
     public static void newObject(double x, double y){
@@ -13,10 +15,13 @@ public class Solver {
     }
 
     static void update(double dt){
-        applyGravity();
-        solveCollisions();
-        applyConstraint();
-        updatePositions(dt);
+        double subDt = dt/subSteps;
+        for(int i = 0; i < subSteps; i++) {
+            applyGravity();
+            solveCollisions();
+            applyConstraint();
+            updatePositions(subDt);
+        }
     }
 
     static void updatePositions(double dt){
