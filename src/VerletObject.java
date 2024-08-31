@@ -5,7 +5,7 @@ import static processing.core.PApplet.println;
 public class VerletObject {
     public Vector2D positionCurrent;
     public Vector2D positionOld;
-    public Vector2D acceleration = new Vector2D(0,0);
+    public Vector2D acceleration = Vector2D.ZERO;
 
     public double radius = 15;
 
@@ -17,13 +17,17 @@ public class VerletObject {
     public void updatePosition(double dt){
         Vector2D velocity = positionCurrent.subtract(positionOld);
 
-        positionOld = positionCurrent;
+        positionOld = new Vector2D(1,positionCurrent);
         positionCurrent = positionCurrent.add(velocity.add(acceleration.scalarMultiply(dt*dt)));
-        println(acceleration);
+
         acceleration = new Vector2D(0,0);
     }
 
     public void accelerate(Vector2D acc){
-        acceleration.add(acc);
+        acceleration = acceleration.add(acc);
+    }
+
+    public void applyConstraint(){
+
     }
 }
