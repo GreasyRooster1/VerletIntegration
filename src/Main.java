@@ -4,6 +4,7 @@ import javax.swing.*;
 
 public class Main extends PApplet {
     public static Main app;
+    public static double dt = 1;
 
     public void settings(){
         size(500,500);
@@ -14,10 +15,20 @@ public class Main extends PApplet {
     }
 
     public void draw(){
+        dt = 1/frameRate;
+
         background(0);
         Input.getInput();
-        Solver.update(0.01);
+        Solver.update(dt);
         Renderer.render();
+        drawHUD();
+    }
+
+    public void drawHUD(){
+        fill(255);
+        text("FPS:"+frameRate,10,10);
+        text("Obj Count:"+Solver.objects.length,10,20);
+        text("∆t:"+dt,10,30);
     }
 
 
