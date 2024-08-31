@@ -23,11 +23,7 @@ public class VerletObject {
         acceleration = new Vector2D(0,0);
     }
 
-    public void accelerate(Vector2D acc){
+    public void accelerate(Vector2D acc) {
         acceleration = acceleration.add(acc);
-    }
-
-    public void applyConstraint(){
-
     }
 }
