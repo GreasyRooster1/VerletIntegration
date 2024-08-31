@@ -1,5 +1,6 @@
 package main.Constraints;
 
+import main.Main;
 import main.VerletObject;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
@@ -16,5 +17,10 @@ public class CircularBorderConstraint extends Constraint{
             Vector2D n = new Vector2D(toObj.getX()/dist, toObj.getY()/dist);
             obj.positionCurrent = CircularBorderConstraint.center.add(n.scalarMultiply(CircularBorderConstraint.radius-obj.radius));
         }
+    }
+
+    public void render(){
+        Main.app.fill(127);
+        Main.app.ellipse(CircularBorderConstraint.center.getX(), CircularBorderConstraint.center.getY(), CircularBorderConstraint.radius);
     }
 }
