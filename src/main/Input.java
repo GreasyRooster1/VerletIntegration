@@ -2,7 +2,7 @@ package main;
 
 public class Input {
     public static void getInput(){
-        if(Main.app.mousePressed&Main.app.frameCount%10==0){
+        if(Main.app.mousePressed){
             Solver.newObject(Main.app.mouseX,Main.app.mouseY);
         }
     }
