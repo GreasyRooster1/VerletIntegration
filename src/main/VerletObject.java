@@ -22,6 +22,7 @@ public class VerletObject {
         positionOld = new Vector2D(x, y);
 
         color = Color.getRainbow(Main.app.frameCount/100f);
+        radius = Main.app.random(5,15);
 
         ID = UUID.randomUUID();
     }

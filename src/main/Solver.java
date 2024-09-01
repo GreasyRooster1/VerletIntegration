@@ -10,14 +10,22 @@ import static processing.core.PApplet.println;
 
 public class Solver {
     public static VerletObject[] objects = {};
+    public static Link[] links = {};
     public static Constraint[] constraints = {};
 
     public static int subSteps = 4;
 
     public static Vector2D gravity = new Vector2D(0, 1000);
 
-    public static void newObject(double x, double y){
-        objects = (VerletObject[]) append(objects,new VerletObject(x,y));
+    public static VerletObject newObject(double x, double y){
+        VerletObject o = new VerletObject(x,y);
+        objects = (VerletObject[]) append(objects,o);
+        return o;
+    }
+    public static Link newLink(VerletObject obj1,VerletObject obj2,double targetDist){
+        Link l = new Link(obj1,obj2,targetDist);
+        links = (Link[]) append(links,l);
+        return l;
     }
     public static void newConstraint(Constraint c){
         constraints = (Constraint[]) append(constraints,c);
@@ -32,8 +40,9 @@ public class Solver {
         double subDt = dt/subSteps;
         for(int i = 0; i < subSteps; i++) {
             applyGravity();
-            solveCollisions();
             applyConstraint();
+            applyLinks();
+            solveCollisions();
             updatePositions(subDt);
         }
     }
@@ -47,6 +56,12 @@ public class Solver {
     static void applyGravity(){
         for (VerletObject obj:objects){
             obj.accelerate(gravity);
+        }
+    }
+
+    public static void applyLinks(){
+        for (Link link:links){
+            link.apply();
         }
     }
 
