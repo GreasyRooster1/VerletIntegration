@@ -13,8 +13,7 @@ public class Main extends PApplet {
     public void setup(){
         app = this;
         Solver.setupConstraints();
-        Solver.newObject(50,350).setStatic(true).setRadius(25).setColor(255,255,255);
-        Solver.newObject(450,350).setStatic(true).setRadius(25).setColor(255,255,255);
+        createMap();
     }
 
     public void draw(){
@@ -37,6 +36,17 @@ public class Main extends PApplet {
 
     public static void main(String[] args) {
         PApplet.runSketch(new String[] { "main.Main" },  new Main());
+    }
+
+    public void createMap(){
+        Solver.newObject(50,350).setStatic(true).setRadius(15).setColor(255,255,255);
+        Solver.newObject(450,350).setStatic(true).setRadius(15).setColor(255,255,255);
+
+        int total = 50;
+        float step = 450f/total;
+        for (float i = 50+step; i < 450f; i+=step) {
+            Solver.newObject(i,350).setRadius(step/2).setColor(255,255,255);
+        }
     }
 
     public void ellipse(double x,double y,double r){
