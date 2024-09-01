@@ -16,7 +16,7 @@ public class Solver {
 
     public static CollisionCell[][] collisionCells = {};
 
-    public static int subSteps = 8;
+    public static int subSteps = 16;
 
     public static Vector2D gravity = new Vector2D(0, 1000);
 
