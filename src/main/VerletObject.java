@@ -61,4 +61,9 @@ public class VerletObject {
         this.color = Main.app.color(r,g,b);
         return this;
     }
+
+    public VerletObject setAcceleration(Vector2D vector2D) {
+        acceleration = vector2D;
+        return this;
+    }
 }
