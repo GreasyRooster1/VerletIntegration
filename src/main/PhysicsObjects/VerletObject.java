@@ -21,6 +21,7 @@ public class VerletObject {
 
     public double radius;
     public static final double DEFAULT_RADIUS = 3;
+    public double drag = 0.1;
 
     public VerletObject(double x, double y) {
         positionCurrent = new Vector2D(x, y);
@@ -40,12 +41,16 @@ public class VerletObject {
             positionCurrent = initalPosition;
             return;
         }
-        Vector2D velocity = positionCurrent.subtract(positionOld);
+        Vector2D velocity = getVelocity();
 
         positionOld = new Vector2D(1,positionCurrent);
         positionCurrent = positionCurrent.add(velocity.add(acceleration.scalarMultiply(dt*dt)));
 
         acceleration = new Vector2D(0,0);
+    }
+
+    public Vector2D getVelocity(){
+        return positionCurrent.subtract(positionOld);
     }
 
     public void accelerate(Vector2D acc) {

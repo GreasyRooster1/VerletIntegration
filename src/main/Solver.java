@@ -6,6 +6,7 @@ import main.PhysicsObjects.VerletObject;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
 import static java.lang.Math.floor;
+import static java.lang.Math.pow;
 import static processing.core.PApplet.*;
 
 public class Solver {
@@ -59,6 +60,8 @@ public class Solver {
             updateGenerics(dt);
 
             applyGravity();
+            applyDrag();
+
             applyConstraint();
             applyLinks();
 
@@ -84,6 +87,13 @@ public class Solver {
     static void applyGravity(){
         for (VerletObject obj:objects){
             obj.accelerate(gravity);
+        }
+    }
+
+    static void applyDrag(){
+        for (VerletObject obj:objects) {
+            Vector2D drag_force = new Vector2D(pow(obj.getVelocity().getX(),2),pow(obj.getVelocity().getY(),2)).scalarMultiply(0.5*obj.drag);
+            obj.accelerate(drag_force.negate());
         }
     }
 
