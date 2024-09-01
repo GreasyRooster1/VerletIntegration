@@ -1,5 +1,8 @@
 package main;
 
+import main.PhysicsObjects.Link;
+import main.PhysicsObjects.VerletObject;
+
 public class Renderer {
     public static void render(){
         renderConstraints();

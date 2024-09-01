@@ -1,7 +1,8 @@
-package main;
+package main.PhysicsObjects;
 
+import main.Color;
+import main.Main;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
-import processing.core.PApplet;
 
 import java.util.UUID;
 

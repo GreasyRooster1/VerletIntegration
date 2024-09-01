@@ -1,5 +1,7 @@
 package main;
 
+import main.PhysicsObjects.VerletObject;
+
 public class CollisionCell {
     public int[] objectIndices = {};
     public int x,y;

@@ -2,6 +2,8 @@ package main;
 
 import main.Constraints.MouseConstraint;
 import main.Constraints.WindowBorderConstraint;
+import main.PhysicsObjects.Link;
+import main.PhysicsObjects.VerletObject;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
 import static java.lang.Math.floor;

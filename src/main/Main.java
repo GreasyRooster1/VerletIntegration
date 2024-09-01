@@ -1,5 +1,6 @@
 package main;
 
+import main.PhysicsObjects.VerletObject;
 import processing.core.PApplet;
 
 public class Main extends PApplet {
