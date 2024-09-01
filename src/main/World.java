@@ -1,13 +1,19 @@
 package main;
 
+import main.Constraints.MouseConstraint;
+import main.Constraints.WindowBorderConstraint;
+import main.PhysicsObjects.Spout;
 import main.PhysicsObjects.VerletObject;
 
 public class World {
     public static void create() {
-        chainWorld();
+        spoutWorld();
     }
 
     private static void chainWorld(){
+        Solver.newConstraint(new WindowBorderConstraint());
+        Solver.newConstraint(new MouseConstraint());
+
         int objCount = 1;
         double endRadius = VerletObject.DEFAULT_RADIUS;
         float step = (float) VerletObject.DEFAULT_RADIUS*2;
@@ -28,5 +34,13 @@ public class World {
         VerletObject chainEnd = Solver.newObject(450,chainHeight).setStatic(true).setRadius(endRadius).setColor(255,255,255);
 
         Solver.newLink(chainEnd,Solver.objects[objCount-1],step);
+    }
+
+    private static void spoutWorld(){
+        Solver.newConstraint(new WindowBorderConstraint());
+        Solver.newConstraint(new MouseConstraint());
+
+        Solver.newGeneric(new Spout(25,50).setShootAcceleration(250_000,0));
+        Solver.newGeneric(new Spout(25,60).setShootAcceleration(250_000,0));
     }
 }

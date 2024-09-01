@@ -1,8 +1,7 @@
 package main;
 
-import main.Constraints.MouseConstraint;
-import main.Constraints.WindowBorderConstraint;
 import main.PhysicsObjects.Link;
+import main.PhysicsObjects.PhysicsGeneric;
 import main.PhysicsObjects.VerletObject;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
@@ -13,6 +12,7 @@ public class Solver {
     public static VerletObject[] objects = {};
     public static Link[] links = {};
     public static Constraint[] constraints = {};
+    public static PhysicsGeneric[] generics = {};
 
     public static CollisionCell[][] collisionCells = {};
 
@@ -33,9 +33,12 @@ public class Solver {
     public static void newConstraint(Constraint c){
         constraints = (Constraint[]) append(constraints,c);
     }
+    public static PhysicsGeneric newGeneric(PhysicsGeneric g){
+        generics = (PhysicsGeneric[]) append(generics,g);
+        return g;
+    }
 
     public static void setup(){
-        setupConstraints();
         setupCollisionCells();
     }
 
@@ -50,20 +53,25 @@ public class Solver {
         }
     }
 
-    static void setupConstraints(){
-        newConstraint(new WindowBorderConstraint());
-        newConstraint(new MouseConstraint());
-    }
-
     static void update(double dt){
         double subDt = dt/subSteps;
         for(int i = 0; i < subSteps; i++) {
+            updateGenerics(dt);
+
             applyGravity();
             applyConstraint();
             applyLinks();
+
             enterCollisionCells();
             solveCollisions();
+
             updatePositions(subDt);
+        }
+    }
+
+    static void updateGenerics(double dt){
+        for(PhysicsGeneric generic:generics){
+            generic.update(dt);
         }
     }
 
