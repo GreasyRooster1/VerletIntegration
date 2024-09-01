@@ -13,7 +13,7 @@ public class Solver {
     public static Link[] links = {};
     public static Constraint[] constraints = {};
 
-    public static int subSteps = 4;
+    public static int subSteps = 8;
 
     public static Vector2D gravity = new Vector2D(0, 1000);
 
