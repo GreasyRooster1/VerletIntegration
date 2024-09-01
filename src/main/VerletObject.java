@@ -1,6 +1,7 @@
 package main;
 
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
+import processing.core.PApplet;
 
 import java.util.UUID;
 
@@ -46,5 +47,18 @@ public class VerletObject {
 
     public void accelerate(Vector2D acc) {
         acceleration = acceleration.add(acc);
+    }
+
+    public VerletObject setStatic(boolean isStatic) {
+        this.isStatic = isStatic;
+        return this;
+    }
+    public VerletObject setRadius(double radius) {
+        this.radius = radius;
+        return this;
+    }
+    public VerletObject setColor(float r, float g, float b) {
+        this.color = Main.app.color(r,g,b);
+        return this;
     }
 }
