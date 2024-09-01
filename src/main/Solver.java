@@ -97,16 +97,20 @@ public class Solver {
                 if(obj1.ID.equals(obj2.ID)){
                     continue;
                 }
-                Vector2D collisionAxis = obj1.positionCurrent.subtract(obj2.positionCurrent);
-                double dist = collisionAxis.getNorm();
-                if(dist < obj1.radius+obj2.radius){
-                    Vector2D n =  new Vector2D(collisionAxis.getX()/dist, collisionAxis.getY()/dist);
-                    double delta = obj1.radius+obj2.radius - dist;
-                    obj1.positionCurrent = obj1.positionCurrent.add(n.scalarMultiply(delta).scalarMultiply(.5));
-                    obj2.positionCurrent = obj2.positionCurrent.subtract(n.scalarMultiply(delta).scalarMultiply(.5));
-
-                }
+                solveCollisionBetweenObjects(obj1,obj2);
             }
+        }
+    }
+
+    public static void solveCollisionBetweenObjects(VerletObject obj1, VerletObject obj2){
+        Vector2D collisionAxis = obj1.positionCurrent.subtract(obj2.positionCurrent);
+        double dist = collisionAxis.getNorm();
+        if(dist < obj1.radius+obj2.radius){
+            Vector2D n =  new Vector2D(collisionAxis.getX()/dist, collisionAxis.getY()/dist);
+            double delta = obj1.radius+obj2.radius - dist;
+            obj1.positionCurrent = obj1.positionCurrent.add(n.scalarMultiply(delta).scalarMultiply(.5));
+            obj2.positionCurrent = obj2.positionCurrent.subtract(n.scalarMultiply(delta).scalarMultiply(.5));
+
         }
     }
 
