@@ -92,12 +92,26 @@ public class Solver {
     }
 
     public static void solveCollisions(){
-        for (VerletObject obj1:objects) {
-            for (VerletObject obj2 : objects) {
-                if(obj1.ID.equals(obj2.ID)){
+        for(int x = 1; x < collisionCells.length-1; x++){
+            for(int y = 1; y < collisionCells[x].length-1; y++){
+                CollisionCell currentCell = collisionCells[x][y];
+                for(int dx=-1; dx <= 1; dx++){
+                    for(int dy=-1; dy <= 1; dy++){
+                        CollisionCell otherCell =collisionCells[x+dx][y+dy];
+                        solveCollisionBetweenCells(currentCell,otherCell);
+                    }
+                }
+            }
+        }
+    }
+
+    public static void solveCollisionBetweenCells(CollisionCell cell1,CollisionCell cell2){
+        for(int obj1Index:cell1.objectIndices){
+            for(int obj2Index:cell2.objectIndices){
+                if(obj1Index==obj2Index){
                     continue;
                 }
-                solveCollisionBetweenObjects(obj1,obj2);
+                solveCollisionBetweenObjects(objects[obj1Index], objects[obj2Index]);
             }
         }
     }
