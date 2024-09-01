@@ -18,7 +18,8 @@ public class VerletObject {
 
     public int color;
 
-    public double radius = 10;
+    public double radius;
+    public static final double DEFAULT_RADIUS = 3;
 
     public VerletObject(double x, double y) {
         positionCurrent = new Vector2D(x, y);
@@ -26,7 +27,8 @@ public class VerletObject {
         initalPosition = new Vector2D(x, y);
 
         color = Color.getRainbow(Main.app.frameCount/100f);
-        radius = Main.app.random(5,10);
+
+        radius = DEFAULT_RADIUS;
 
         ID = UUID.randomUUID();
     }

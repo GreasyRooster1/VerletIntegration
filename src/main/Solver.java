@@ -1,17 +1,18 @@
 package main;
 
-import main.Constraints.CircularBorderConstraint;
 import main.Constraints.MouseConstraint;
 import main.Constraints.WindowBorderConstraint;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
-import static processing.core.PApplet.append;
-import static processing.core.PApplet.println;
+import static java.lang.Math.floor;
+import static processing.core.PApplet.*;
 
 public class Solver {
     public static VerletObject[] objects = {};
     public static Link[] links = {};
     public static Constraint[] constraints = {};
+
+    public static CollisionCell[][] collisionCells = {};
 
     public static int subSteps = 8;
 
@@ -31,6 +32,22 @@ public class Solver {
         constraints = (Constraint[]) append(constraints,c);
     }
 
+    public static void setup(){
+        setupConstraints();
+        setupCollisionCells();
+    }
+
+    static void setupCollisionCells(){
+        double stepSize = VerletObject.DEFAULT_RADIUS*2;
+        for (int i = 0; i < Main.app.width/stepSize; i++) {
+            CollisionCell[] row = {};
+            for (int j = 0; j < Main.app.height/stepSize; j++) {
+                row = (CollisionCell[]) append(row,new CollisionCell(i,j));
+            }
+            collisionCells = (CollisionCell[][]) append(collisionCells,row);
+        }
+    }
+
     static void setupConstraints(){
         newConstraint(new WindowBorderConstraint());
         newConstraint(new MouseConstraint());
@@ -42,6 +59,7 @@ public class Solver {
             applyGravity();
             applyConstraint();
             applyLinks();
+            enterCollisionCells();
             solveCollisions();
             updatePositions(subDt);
         }
@@ -89,6 +107,30 @@ public class Solver {
 
                 }
             }
+        }
+    }
+
+    public static void resetCollisionCells(){
+        for (CollisionCell[] row:Solver.collisionCells){
+            for (CollisionCell cell:row) {
+                cell.objectIndices = new int[]{};
+            }
+        }
+    }
+
+    public static void enterCollisionCells(){
+        resetCollisionCells();
+        int count = 0;
+        for (VerletObject obj:objects) {
+            int i = (int) floor(obj.positionCurrent.getX()/(VerletObject.DEFAULT_RADIUS*2));
+            int j = (int) floor(obj.positionCurrent.getY()/(VerletObject.DEFAULT_RADIUS*2));
+
+            i = max(0,min((int) floor(500/(VerletObject.DEFAULT_RADIUS*2)),i));
+            j = max(0,min((int) floor(500/(VerletObject.DEFAULT_RADIUS*2)),j));
+
+            CollisionCell cell = collisionCells[i][j];
+            cell.objectIndices = append(cell.objectIndices,count);
+            count++;
         }
     }
 }

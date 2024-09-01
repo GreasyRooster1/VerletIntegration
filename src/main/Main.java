@@ -12,7 +12,7 @@ public class Main extends PApplet {
 
     public void setup(){
         app = this;
-        Solver.setupConstraints();
+        Solver.setup();
         createMap();
     }
 
@@ -39,16 +39,15 @@ public class Main extends PApplet {
     }
 
     public void createMap(){
-        int total = 50;
         int objCount = 1;
-        double endRadius = 15;
-        float step = 450f/total;
+        double endRadius = VerletObject.DEFAULT_RADIUS;
+        float step = (float) VerletObject.DEFAULT_RADIUS*2;
         float chainHeight = 250;
 
         Solver.newObject(50,chainHeight).setStatic(true).setRadius(endRadius).setColor(255,255,255);
 
         for (float i = 50+step; i < 450f; i+=step) {
-            Solver.newObject(i,chainHeight).setRadius(step/2).setColor(255,255,255);
+            Solver.newObject(i,chainHeight).setColor(255,255,255);
             if(objCount==1) {
                 Solver.newLink(Solver.objects[objCount - 1], Solver.objects[objCount], step/2+endRadius);
             }else {
@@ -67,5 +66,8 @@ public class Main extends PApplet {
     }
     public void line(double x1,double y1,double x2,double y2){
         line((float) x1,(float) y1,(float) x2,(float) y2);
+    }
+    public void rect(double x1,double y1,double x2,double y2){
+        rect((float) x1,(float) y1,(float) x2,(float) y2);
     }
 }

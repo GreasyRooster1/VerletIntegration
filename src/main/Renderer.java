@@ -1,15 +1,26 @@
 package main;
 
-import main.Constraints.CircularBorderConstraint;
-
 public class Renderer {
     public static void render(){
         renderConstraints();
         renderLinks();
         renderVerletObjects();
+        renderConstraints();
+        renderCollisionCells();
     }
 
-    private static void renderConstraints() {
+    public static void renderCollisionCells(){
+        for (CollisionCell[] row:Solver.collisionCells){
+            for (CollisionCell cell:row){
+                Main.app.strokeWeight(1);
+                Main.app.stroke(0,0,255,50);
+                Main.app.fill(255,cell.objectIndices.length*50);
+                Main.app.rect(cell.x*VerletObject.DEFAULT_RADIUS*2,cell.y*VerletObject.DEFAULT_RADIUS*2,VerletObject.DEFAULT_RADIUS*2,VerletObject.DEFAULT_RADIUS*2);
+            }
+        }
+    }
+
+    public static void renderConstraints() {
         for(Constraint c:Solver.constraints){
             c.render();
         }
