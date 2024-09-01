@@ -13,6 +13,8 @@ public class Main extends PApplet {
     public void setup(){
         app = this;
         Solver.setupConstraints();
+        Solver.newObject(50,350).isStatic=true;
+        Solver.newObject(450,350).isStatic=true;
     }
 
     public void draw(){

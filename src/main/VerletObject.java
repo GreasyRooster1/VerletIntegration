@@ -9,9 +9,11 @@ import static processing.core.PApplet.println;
 public class VerletObject {
     public final UUID ID;
 
+    public final Vector2D initalPosition;
     public Vector2D positionCurrent;
     public Vector2D positionOld;
     public Vector2D acceleration = Vector2D.ZERO;
+    public boolean isStatic = false;
 
     public int color;
 
@@ -20,6 +22,7 @@ public class VerletObject {
     public VerletObject(double x, double y) {
         positionCurrent = new Vector2D(x, y);
         positionOld = new Vector2D(x, y);
+        initalPosition = new Vector2D(x, y);
 
         color = Color.getRainbow(Main.app.frameCount/100f);
         radius = Main.app.random(5,15);
@@ -28,6 +31,11 @@ public class VerletObject {
     }
 
     public void updatePosition(double dt){
+        if(isStatic){
+            acceleration = Vector2D.ZERO;
+            positionCurrent = initalPosition;
+            return;
+        }
         Vector2D velocity = positionCurrent.subtract(positionOld);
 
         positionOld = new Vector2D(1,positionCurrent);
