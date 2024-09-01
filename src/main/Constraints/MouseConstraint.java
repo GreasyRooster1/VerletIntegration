@@ -28,9 +28,9 @@ public class MouseConstraint extends Constraint{
 
     public void render(){
         if(Main.app.mousePressed){
-            Main.app.fill(50);
+            Main.app.fill(255,50);
         }else {
-            Main.app.fill(127);
+            Main.app.fill(255,127);
         }
         Main.app.noStroke();
         Main.app.ellipse(Main.app.mouseX,Main.app.mouseY, radius);

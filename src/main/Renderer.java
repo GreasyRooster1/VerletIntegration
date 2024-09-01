@@ -6,7 +6,7 @@ public class Renderer {
         renderLinks();
         renderVerletObjects();
         renderConstraints();
-        renderCollisionCells();
+        //renderCollisionCells();
     }
 
     public static void renderCollisionCells(){
@@ -15,7 +15,7 @@ public class Renderer {
                 Main.app.strokeWeight(1);
                 Main.app.stroke(0,0,255,50);
                 Main.app.fill(255,cell.objectIndices.length*50);
-                Main.app.rect(cell.x*VerletObject.DEFAULT_RADIUS*2,cell.y*VerletObject.DEFAULT_RADIUS*2,VerletObject.DEFAULT_RADIUS*2,VerletObject.DEFAULT_RADIUS*2);
+                Main.app.rect(cell.x*CollisionCell.CELL_SIZE,cell.y*CollisionCell.CELL_SIZE,CollisionCell.CELL_SIZE,CollisionCell.CELL_SIZE);
             }
         }
     }

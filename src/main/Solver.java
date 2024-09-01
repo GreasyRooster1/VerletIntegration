@@ -126,11 +126,11 @@ public class Solver {
         resetCollisionCells();
         int count = 0;
         for (VerletObject obj:objects) {
-            int i = (int) floor(obj.positionCurrent.getX()/(VerletObject.DEFAULT_RADIUS*2));
-            int j = (int) floor(obj.positionCurrent.getY()/(VerletObject.DEFAULT_RADIUS*2));
+            int i = (int) floor(obj.positionCurrent.getX()/CollisionCell.CELL_SIZE);
+            int j = (int) floor(obj.positionCurrent.getY()/CollisionCell.CELL_SIZE);
 
-            i = max(0,min((int) floor(500/(VerletObject.DEFAULT_RADIUS*2)),i));
-            j = max(0,min((int) floor(500/(VerletObject.DEFAULT_RADIUS*2)),j));
+            i = max(0,min((int) floor(500/CollisionCell.CELL_SIZE),i));
+            j = max(0,min((int) floor(500/CollisionCell.CELL_SIZE),j));
 
             CollisionCell cell = collisionCells[i][j];
             cell.objectIndices = append(cell.objectIndices,count);
