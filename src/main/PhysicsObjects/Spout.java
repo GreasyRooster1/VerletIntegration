@@ -5,7 +5,7 @@ import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
 public class Spout extends PhysicsGeneric{
     public Vector2D shootAcceleration;
-    public double safeRadius = 5;
+    public double safeRadius = 10;
 
     public Spout(double x,double y) {
         super(x,y);

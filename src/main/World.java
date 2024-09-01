@@ -1,5 +1,6 @@
 package main;
 
+import main.Constraints.CircularBorderConstraint;
 import main.Constraints.MouseConstraint;
 import main.Constraints.WindowBorderConstraint;
 import main.PhysicsObjects.Spout;
@@ -37,10 +38,10 @@ public class World {
     }
 
     private static void spoutWorld(){
-        Solver.newConstraint(new WindowBorderConstraint());
+        Solver.newConstraint(new CircularBorderConstraint());
         Solver.newConstraint(new MouseConstraint());
 
-        Solver.newGeneric(new Spout(25,50).setShootAcceleration(250_000,0));
-        Solver.newGeneric(new Spout(25,60).setShootAcceleration(250_000,0));
+        Solver.newGeneric(new Spout(250,50).setShootAcceleration(250_000,0));
+        Solver.newGeneric(new Spout(250,60).setShootAcceleration(250_000,0));
     }
 }

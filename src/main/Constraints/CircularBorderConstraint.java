@@ -8,7 +8,7 @@ import main.Constraint;
 
 public class CircularBorderConstraint extends Constraint{
     public static Vector2D center = new Vector2D(250,250);
-    public static double radius = 200;
+    public static double radius = 250;
 
     public void apply(VerletObject obj){
         Vector2D toObj = obj.positionCurrent.subtract(CircularBorderConstraint.center);
@@ -20,7 +20,8 @@ public class CircularBorderConstraint extends Constraint{
     }
 
     public void render(){
-        Main.app.fill(127);
+        Main.app.noFill();
+        Main.app.stroke(255,127);
         Main.app.ellipse(CircularBorderConstraint.center.getX(), CircularBorderConstraint.center.getY(), CircularBorderConstraint.radius);
     }
 }
