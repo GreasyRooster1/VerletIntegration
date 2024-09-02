@@ -60,13 +60,12 @@ public class Solver {
             updateGenerics(dt);
 
             applyGravity();
-            //applyDrag();
-
-            enterCollisionCells();
-            solveCollisions();
 
             applyConstraint();
             applyLinks();
+
+            enterCollisionCells();
+            solveCollisions();
 
             updatePositions(subDt);
         }
@@ -113,11 +112,14 @@ public class Solver {
     }
 
     public static void solveCollisions(){
-        for(int x = 1; x < collisionCells.length-1; x++){
-            for(int y = 1; y < collisionCells[x].length-1; y++){
+        for(int x = 0; x < collisionCells.length; x++){
+            for(int y = 0; y < collisionCells[x].length; y++){
                 CollisionCell currentCell = collisionCells[x][y];
                 for(int dx=-1; dx <= 1; dx++){
                     for(int dy=-1; dy <= 1; dy++){
+                        if(x+dx<0||x+dx>=collisionCells.length||y+dy<0||y+dy>=collisionCells[x].length){
+                            continue;
+                        }
                         CollisionCell otherCell =collisionCells[x+dx][y+dy];
                         solveCollisionBetweenCells(currentCell,otherCell);
                     }

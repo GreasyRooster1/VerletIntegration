@@ -46,6 +46,8 @@ public class VerletObject {
         positionOld = new Vector2D(1,positionCurrent);
         positionCurrent = positionCurrent.add(velocity.add(acceleration.scalarMultiply(dt*dt)));
 
+        //positionCurrent = new Vector2D(positionCurrent.getX()%Main.app.width,positionCurrent.getY()%Main.app.height);
+
         acceleration = new Vector2D(0,0);
     }
 
