@@ -21,7 +21,7 @@ public class VerletObject {
 
     public double radius;
     public static final double DEFAULT_RADIUS = 3;
-    public double drag = 0.1;
+    public double drag = 0;
 
     public VerletObject(double x, double y) {
         positionCurrent = new Vector2D(x, y);

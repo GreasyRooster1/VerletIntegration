@@ -60,7 +60,7 @@ public class Solver {
             updateGenerics(dt);
 
             applyGravity();
-            applyDrag();
+            //applyDrag();
 
             applyConstraint();
             applyLinks();
@@ -90,6 +90,7 @@ public class Solver {
         }
     }
 
+    @Deprecated
     static void applyDrag(){
         for (VerletObject obj:objects) {
             Vector2D drag_force = new Vector2D(pow(obj.getVelocity().getX(),2),pow(obj.getVelocity().getY(),2)).scalarMultiply(0.5*obj.drag);
