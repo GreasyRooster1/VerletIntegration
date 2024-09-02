@@ -1,11 +1,12 @@
 package main;
 
-import main.PhysicsObjects.VerletObject;
 import processing.core.PApplet;
+import processing.event.MouseEvent;
 
 public class Main extends PApplet {
     public static Main app;
     public static double dt = 1;
+    public static double timeWarp = 1;
     public static int maxObjects = 0;
 
     public void settings(){
@@ -21,7 +22,7 @@ public class Main extends PApplet {
     }
 
     public void draw(){
-        dt = 1/frameRate;
+        dt = (1/frameRate)* timeWarp;
 
         background(0);
         Input.getInput();
@@ -30,6 +31,14 @@ public class Main extends PApplet {
 
         updateMaxObjects();
         drawHUD();
+    }
+
+    public void mouseWheel(MouseEvent event) {
+        float e = event.getCount();
+        timeWarp+=e/-10;
+        if(timeWarp<0){
+            timeWarp=0;
+        }
     }
 
     public void updateMaxObjects(){
@@ -43,7 +52,8 @@ public class Main extends PApplet {
         text("FPS:"+frameRate,10,10);
         text("Obj Count:"+Solver.objects.length,10,20);
         text("∆t:"+dt,10,30);
-        text("Max Obj Count:"+maxObjects,10,40);
+        text("timeWarp:"+timeWarp,10,40);
+        text("Max Obj Count:"+maxObjects,10,50);
     }
 
 
