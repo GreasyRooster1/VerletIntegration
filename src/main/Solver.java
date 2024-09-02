@@ -117,10 +117,12 @@ public class Solver {
                 CollisionCell currentCell = collisionCells[x][y];
                 for(int dx=-1; dx <= 1; dx++){
                     for(int dy=-1; dy <= 1; dy++){
-                        if(x+dx<0||x+dx>=collisionCells.length||y+dy<0||y+dy>=collisionCells[x].length){
+                        int getX = x+dx;
+                        int getY = y+dy;
+                        if(getX<0||getX>=collisionCells.length||getY<0||getY>=collisionCells[x].length){
                             continue;
                         }
-                        CollisionCell otherCell =collisionCells[x+dx][y+dy];
+                        CollisionCell otherCell =collisionCells[getX][getY];
                         solveCollisionBetweenCells(currentCell,otherCell);
                     }
                 }
@@ -145,8 +147,9 @@ public class Solver {
         if(dist < obj1.radius+obj2.radius){
             Vector2D n =  new Vector2D(collisionAxis.getX()/dist, collisionAxis.getY()/dist);
             double delta = obj1.radius+obj2.radius - dist;
-            obj1.positionCurrent = obj1.positionCurrent.add(n.scalarMultiply(delta).scalarMultiply(.5));
-            obj2.positionCurrent = obj2.positionCurrent.subtract(n.scalarMultiply(delta).scalarMultiply(.5));
+            Vector2D diff = n.scalarMultiply(delta).scalarMultiply(.5);
+            obj1.positionCurrent = obj1.positionCurrent.add(diff);
+            obj2.positionCurrent = obj2.positionCurrent.subtract(diff);
 
         }
     }
