@@ -13,14 +13,14 @@ public class WindowBorderConstraint extends Constraint{
 
     public void apply(VerletObject obj){
         obj.positionCurrent = new Vector2D(
-                min(max(obj.positionCurrent.getX(),obj.radius),500-obj.radius),
-                min(max(obj.positionCurrent.getY(),obj.radius),500-obj.radius));
+                min(max(obj.positionCurrent.getX(),obj.radius),Main.app.width-obj.radius),
+                min(max(obj.positionCurrent.getY(),obj.radius),Main.app.height-obj.radius));
     }
 
     public void render(){
         Main.app.stroke(127);
         Main.app.strokeWeight(4);
         Main.app.noFill();
-        Main.app.rect(0,0,500,500);
+        Main.app.rect(0,0,Main.app.width,Main.app.height);
     }
 }

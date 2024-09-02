@@ -20,7 +20,7 @@ public class VerletObject {
     public int color;
 
     public double radius;
-    public static final double DEFAULT_RADIUS = 2;
+    public static final double DEFAULT_RADIUS = 10;
     public double drag = 0;
 
     public VerletObject(double x, double y) {
