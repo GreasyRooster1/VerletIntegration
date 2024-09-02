@@ -166,8 +166,8 @@ public class Solver {
             int i = (int) floor(obj.positionCurrent.getX()/CollisionCell.CELL_SIZE);
             int j = (int) floor(obj.positionCurrent.getY()/CollisionCell.CELL_SIZE);
 
-            i = max(0,min((int) floor(500/CollisionCell.CELL_SIZE)-1,i));
-            j = max(0,min((int) floor(500/CollisionCell.CELL_SIZE)-1,j));
+            i = max(0,min((int) floor(Main.app.width/CollisionCell.CELL_SIZE)-1,i));
+            j = max(0,min((int) floor(Main.app.height/CollisionCell.CELL_SIZE)-1,j));
 
             CollisionCell cell = collisionCells[i][j];
             cell.objectIndices = append(cell.objectIndices,count);
