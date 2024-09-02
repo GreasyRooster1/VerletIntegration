@@ -6,6 +6,7 @@ import processing.core.PApplet;
 public class Main extends PApplet {
     public static Main app;
     public static double dt = 1;
+    public static int maxObjects = 0;
 
     public void settings(){
         size(1000,1000);
@@ -13,6 +14,8 @@ public class Main extends PApplet {
 
     public void setup(){
         app = this;
+
+        frameRate(120);
         Solver.setup();
         World.create();
     }
@@ -24,7 +27,15 @@ public class Main extends PApplet {
         Input.getInput();
         Solver.update(dt);
         Renderer.render();
+
+        updateMaxObjects();
         drawHUD();
+    }
+
+    public void updateMaxObjects(){
+        if(frameRate>=60){
+            maxObjects=Solver.objects.length;
+        }
     }
 
     public void drawHUD(){
@@ -32,6 +43,7 @@ public class Main extends PApplet {
         text("FPS:"+frameRate,10,10);
         text("Obj Count:"+Solver.objects.length,10,20);
         text("∆t:"+dt,10,30);
+        text("Max Obj Count:"+maxObjects,10,40);
     }
 
 
