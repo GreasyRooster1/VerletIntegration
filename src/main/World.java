@@ -8,7 +8,7 @@ import main.PhysicsObjects.VerletObject;
 
 public class World {
     public static void create() {
-        spoutWorld();
+        chainWorld();
     }
 
     private static void chainWorld(){

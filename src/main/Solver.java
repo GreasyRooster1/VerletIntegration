@@ -17,7 +17,7 @@ public class Solver {
 
     public static CollisionCell[][] collisionCells = {};
 
-    public static int subSteps = 16;
+    public static int subSteps = 8;
 
     public static Vector2D gravity = new Vector2D(0, 1000);
 
@@ -62,11 +62,11 @@ public class Solver {
             applyGravity();
             //applyDrag();
 
-            applyConstraint();
-            applyLinks();
-
             enterCollisionCells();
             solveCollisions();
+
+            applyConstraint();
+            applyLinks();
 
             updatePositions(subDt);
         }
@@ -164,8 +164,8 @@ public class Solver {
             int i = (int) floor(obj.positionCurrent.getX()/CollisionCell.CELL_SIZE);
             int j = (int) floor(obj.positionCurrent.getY()/CollisionCell.CELL_SIZE);
 
-            i = max(0,min((int) floor(500/CollisionCell.CELL_SIZE),i));
-            j = max(0,min((int) floor(500/CollisionCell.CELL_SIZE),j));
+            i = max(0,min((int) floor(500/CollisionCell.CELL_SIZE)-1,i));
+            j = max(0,min((int) floor(500/CollisionCell.CELL_SIZE)-1,j));
 
             CollisionCell cell = collisionCells[i][j];
             cell.objectIndices = append(cell.objectIndices,count);
