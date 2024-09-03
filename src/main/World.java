@@ -8,7 +8,39 @@ import main.PhysicsObjects.VerletObject;
 
 public class World {
     public static void create() {
-        chainWorld();
+        boxWorld();
+    }
+
+    private static void boxWorld(){
+        Solver.newConstraint(new WindowBorderConstraint());
+        Solver.newConstraint(new MouseConstraint());
+
+        int width = 4;
+        int height = 4;
+        double xPos = 250;
+        double yPos = 250;
+        double stepSize = VerletObject.DEFAULT_RADIUS*2;
+
+        int objCount = 0;
+        int xCount = 0;
+
+        for(int x=0;x<width;x++){
+            int yCount = 0;
+            for(int y=0;y<height;y++){
+                Solver.newObject(xPos+(x*stepSize),yPos+(y*stepSize));
+                if(objCount!=0&&yCount!=0) {
+                    Solver.newLink(Solver.objects[objCount - 1], Solver.objects[objCount], stepSize);
+                }
+                yCount++;
+                objCount++;
+            }
+            if(xCount!=0) {
+                for(int y=0;y<height;y++){
+                    Solver.newLink(Solver.objects[objCount-y], Solver.objects[objCount-(y+(xCount*height))], stepSize);
+                }
+            }
+            xCount++;
+        }
     }
 
     private static void chainWorld(){
