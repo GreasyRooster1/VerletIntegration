@@ -18,11 +18,13 @@ public class World {
         int objCount = 1;
         double endRadius = VerletObject.DEFAULT_RADIUS;
         float step = (float) VerletObject.DEFAULT_RADIUS*2;
-        float chainHeight = 250;
+        float chainHeight = Main.app.height/2f;
+        float chainEnd = Main.app.width-Main.app.width/10f;
+        float chainStart = Main.app.width/10f;
 
-        Solver.newObject(50,chainHeight).setStatic(true).setRadius(endRadius).setColor(255,255,255);
+        Solver.newObject(chainStart,chainHeight).setStatic(true).setRadius(endRadius).setColor(255,255,255);
 
-        for (float i = 50+step; i < 450f; i+=step) {
+        for (float i = chainStart+step; i < chainEnd; i+=step) {
             Solver.newObject(i,chainHeight).setColor(255,255,255);
             if(objCount==1) {
                 Solver.newLink(Solver.objects[objCount - 1], Solver.objects[objCount], step/2+endRadius);
@@ -32,9 +34,9 @@ public class World {
             objCount++;
         }
 
-        VerletObject chainEnd = Solver.newObject(450,chainHeight).setStatic(true).setRadius(endRadius).setColor(255,255,255);
+        VerletObject chainEndObj = Solver.newObject(chainEnd,chainHeight).setStatic(true).setRadius(endRadius).setColor(255,255,255);
 
-        Solver.newLink(chainEnd,Solver.objects[objCount-1],step);
+        Solver.newLink(chainEndObj,Solver.objects[objCount-1],step);
     }
 
     private static void spoutWorld(){
