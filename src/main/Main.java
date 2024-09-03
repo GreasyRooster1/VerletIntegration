@@ -10,7 +10,7 @@ public class Main extends PApplet {
     public static int maxObjects = 0;
 
     public void settings(){
-        size(1000,1000);
+        size(500,500);
     }
 
     public void setup(){
