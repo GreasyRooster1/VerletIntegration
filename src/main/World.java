@@ -6,6 +6,9 @@ import main.Constraints.WindowBorderConstraint;
 import main.PhysicsObjects.Spout;
 import main.PhysicsObjects.VerletObject;
 
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
+
 public class World {
     public static void create() {
         boxWorld();
@@ -15,31 +18,32 @@ public class World {
         Solver.newConstraint(new WindowBorderConstraint());
         Solver.newConstraint(new MouseConstraint());
 
-        int width = 4;
-        int height = 4;
+        int width = 10;
+        int height = 10;
         double xPos = 250;
         double yPos = 250;
         double stepSize = VerletObject.DEFAULT_RADIUS*2;
+        double diagonalStepSize = sqrt(pow(stepSize,2)*2);
 
         int objCount = 0;
-        int xCount = 0;
 
         for(int x=0;x<width;x++){
-            int yCount = 0;
             for(int y=0;y<height;y++){
-                Solver.newObject(xPos+(x*stepSize),yPos+(y*stepSize));
-                if(objCount!=0&&yCount!=0) {
+                Solver.newObject(xPos+(x*stepSize),yPos+(y*stepSize)).setColor(255,255,255);
+                if(objCount!=0&&y!=0) {
                     Solver.newLink(Solver.objects[objCount - 1], Solver.objects[objCount], stepSize);
                 }
-                yCount++;
+                if(x!=0){
+                    Solver.newLink(Solver.objects[objCount], Solver.objects[objCount-(height)], stepSize);
+                    if(y!=height-1) {
+                        Solver.newLink(Solver.objects[objCount], Solver.objects[(objCount - (height)) + 1], diagonalStepSize);
+                    }
+                    if(y!=0) {
+                        Solver.newLink(Solver.objects[objCount], Solver.objects[(objCount - (height)) - 1], diagonalStepSize);
+                    }
+                }
                 objCount++;
             }
-            if(xCount!=0) {
-                for(int y=0;y<height;y++){
-                    Solver.newLink(Solver.objects[objCount-y], Solver.objects[objCount-(y+(xCount*height))], stepSize);
-                }
-            }
-            xCount++;
         }
     }
 
