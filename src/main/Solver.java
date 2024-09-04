@@ -2,6 +2,7 @@ package main;
 
 import main.PhysicsObjects.Link;
 import main.PhysicsObjects.PhysicsGeneric;
+import main.PhysicsObjects.Spring;
 import main.PhysicsObjects.VerletObject;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
@@ -12,6 +13,7 @@ import static processing.core.PApplet.*;
 public class Solver {
     public static VerletObject[] objects = {};
     public static Link[] links = {};
+    public static Spring[] springs = {};
     public static Constraint[] constraints = {};
     public static PhysicsGeneric[] generics = {};
 
@@ -29,6 +31,11 @@ public class Solver {
     public static Link newLink(VerletObject obj1,VerletObject obj2,double targetDist){
         Link l = new Link(obj1,obj2,targetDist);
         links = (Link[]) append(links,l);
+        return l;
+    }
+    public static Spring newSpring(VerletObject obj1,VerletObject obj2,double restLength,double stiffness){
+        Spring l = new Spring(obj1,obj2,restLength,stiffness);
+        springs = (Spring[]) append(springs,l);
         return l;
     }
     public static void newConstraint(Constraint c){

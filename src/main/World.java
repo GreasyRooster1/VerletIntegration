@@ -36,10 +36,10 @@ public class World {
                 }
 
                 if(objCount!=0&&y!=0) {
-                    Solver.newLink(Solver.objects[objCount - 1], Solver.objects[objCount], stepSize);
+                    Solver.newSpring(Solver.objects[objCount - 1], Solver.objects[objCount], stepSize);
                 }
                 if(x!=0){
-                    Solver.newLink(Solver.objects[objCount], Solver.objects[objCount-(height)], stepSize);
+                    Solver.newSpring(Solver.objects[objCount], Solver.objects[objCount-(height)], stepSize);
                 }
                 objCount++;
             }
