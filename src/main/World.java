@@ -11,7 +11,39 @@ import static java.lang.Math.sqrt;
 
 public class World {
     public static void create() {
-        boxWorld();
+        clothWorld();
+    }
+
+    private static void clothWorld(){
+        Solver.newConstraint(new WindowBorderConstraint());
+        Solver.newConstraint(new MouseConstraint());
+
+        int width = 10;
+        int height = 10;
+        double stepSize = VerletObject.DEFAULT_RADIUS*4;
+        double xPos = 250-(stepSize*height/2);
+        double yPos = 50;
+
+
+        int objCount = 0;
+
+        for(int x=0;x<width;x++){
+            for(int y=0;y<height;y++){
+                VerletObject obj = Solver.newObject(xPos+(x*stepSize),yPos+(y*stepSize)).setColor(255,255,255);
+
+                if(y==0&(x==0||x==width-1)){
+                    obj.setStatic(true);
+                }
+
+                if(objCount!=0&&y!=0) {
+                    Solver.newLink(Solver.objects[objCount - 1], Solver.objects[objCount], stepSize);
+                }
+                if(x!=0){
+                    Solver.newLink(Solver.objects[objCount], Solver.objects[objCount-(height)], stepSize);
+                }
+                objCount++;
+            }
+        }
     }
 
     private static void boxWorld(){
