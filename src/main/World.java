@@ -24,6 +24,8 @@ public class World {
         double xPos = 250-(stepSize*height/2);
         double yPos = 50;
 
+        double stiffness = 4000;
+
 
         int objCount = 0;
 
@@ -36,10 +38,10 @@ public class World {
                 }
 
                 if(objCount!=0&&y!=0) {
-                    Solver.newSpring(Solver.objects[objCount - 1], Solver.objects[objCount], stepSize,2000);
+                    Solver.newSpring(Solver.objects[objCount - 1], Solver.objects[objCount], stepSize,stiffness);
                 }
                 if(x!=0){
-                    Solver.newSpring(Solver.objects[objCount], Solver.objects[objCount-(height)], stepSize,2000);
+                    Solver.newSpring(Solver.objects[objCount], Solver.objects[objCount-(height)], stepSize,stiffness);
                 }
                 objCount++;
             }
