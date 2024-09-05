@@ -20,7 +20,7 @@ public class VerletObject {
     public int color;
 
     public double radius;
-    public static final double DEFAULT_RADIUS = 5;
+    public static final double DEFAULT_RADIUS =3;
     public double drag = 0;
 
     public VerletObject(double x, double y) {
@@ -30,7 +30,7 @@ public class VerletObject {
 
         color = Color.getRainbow(Main.app.frameCount/100f);
 
-        radius = DEFAULT_RADIUS;
+        radius = DEFAULT_RADIUS;//Main.app.random(2f, (float) DEFAULT_RADIUS);
 
         ID = UUID.randomUUID();
     }

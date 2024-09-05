@@ -23,7 +23,7 @@ public class Spring {
         Vector2D axis = obj1.positionCurrent.subtract(obj2.positionCurrent);
         double dist = axis.getNorm();
         Vector2D n = new Vector2D(axis.getX()/dist, axis.getY()/dist);
-        double delta = targetDist - dist;
+        double delta = restLength - dist;
         obj1.accelerate(n.scalarMultiply(delta*0.5*springMultiplier));
         obj2.accelerate(n.scalarMultiply(delta*0.5*springMultiplier).negate());
     }
