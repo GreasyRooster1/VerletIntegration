@@ -11,7 +11,7 @@ import static java.lang.Math.sqrt;
 
 public class World {
     public static void create() {
-        clothWorld();
+        chainWorld();
     }
 
     private static void clothWorld(){

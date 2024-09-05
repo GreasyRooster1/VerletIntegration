@@ -4,6 +4,8 @@ import main.PhysicsObjects.Link;
 import main.PhysicsObjects.Spring;
 import main.PhysicsObjects.VerletObject;
 
+import static java.lang.Math.abs;
+
 public class Renderer {
     public static void render(){
         renderConstraints();
