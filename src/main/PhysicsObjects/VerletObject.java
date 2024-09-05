@@ -21,7 +21,8 @@ public class VerletObject {
 
     public double radius;
     public static final double DEFAULT_RADIUS =3;
-    public double drag = 0;
+
+    public double mass = 1;
 
     public VerletObject(double x, double y) {
         positionCurrent = new Vector2D(x, y);
@@ -57,6 +58,9 @@ public class VerletObject {
 
     public void accelerate(Vector2D acc) {
         acceleration = acceleration.add(acc);
+    }
+    public void applyForce(Vector2D force) {
+        acceleration = acceleration.add(force.scalarMultiply(1/mass));
     }
 
     public VerletObject setStatic(boolean isStatic) {

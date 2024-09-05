@@ -70,6 +70,7 @@ public class Solver {
 
             applyConstraint();
             applyLinks();
+            applySprings();
 
             enterCollisionCells();
             solveCollisions();
@@ -96,17 +97,15 @@ public class Solver {
         }
     }
 
-    @Deprecated
-    static void applyDrag(){
-        for (VerletObject obj:objects) {
-            Vector2D drag_force = new Vector2D(pow(obj.getVelocity().getX(),2),pow(obj.getVelocity().getY(),2)).scalarMultiply(0.5*obj.drag);
-            obj.accelerate(drag_force.negate());
-        }
-    }
-
     public static void applyLinks(){
         for (Link link:links){
             link.apply();
+        }
+    }
+
+    public static void applySprings(){
+        for (Spring spring:springs){
+            spring.apply();
         }
     }
 
