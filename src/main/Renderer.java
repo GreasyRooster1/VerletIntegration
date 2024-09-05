@@ -1,15 +1,26 @@
 package main;
 
 import main.PhysicsObjects.Link;
+import main.PhysicsObjects.Spring;
 import main.PhysicsObjects.VerletObject;
 
 public class Renderer {
     public static void render(){
         renderConstraints();
         renderLinks();
+        renderSprings();
         renderVerletObjects();
         renderConstraints();
         //renderCollisionCells();
+    }
+
+    public static void renderSprings(){
+        for (Spring spring:Solver.springs){
+            float length = (float) spring.obj1.positionCurrent.subtract(spring.obj2.positionCurrent).getNorm();
+            Main.app.strokeWeight(length/40f);
+            Main.app.stroke(255);
+            Main.app.line(spring.obj1.positionCurrent.getX(),spring.obj1.positionCurrent.getY(),spring.obj2.positionCurrent.getX(),spring.obj2.positionCurrent.getY());
+        }
     }
 
     public static void renderCollisionCells(){
