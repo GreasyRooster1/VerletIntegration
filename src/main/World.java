@@ -103,7 +103,7 @@ public class World {
         Solver.newObject(chainStart,chainHeight).setStatic(true).setRadius(endRadius).setColor(255,255,255);
 
         for (float i = chainStart+step; i < chainEnd; i+=step) {
-            Solver.newObject(i,chainHeight).setColor(255,255,255);
+            Solver.newObject(i,chainHeight).setColor(255,255,255).setRadius(VerletObject.DEFAULT_RADIUS);
             if(objCount==1) {
                 Solver.newLink(Solver.objects[objCount - 1], Solver.objects[objCount], step/2+endRadius);
             }else {
