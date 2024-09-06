@@ -3,6 +3,7 @@ package main;
 import main.Constraints.CircularBorderConstraint;
 import main.Constraints.MouseConstraint;
 import main.Constraints.WindowBorderConstraint;
+import main.PhysicsObjects.SoftBody;
 import main.PhysicsObjects.Spout;
 import main.PhysicsObjects.VerletObject;
 
@@ -11,7 +12,14 @@ import static java.lang.Math.sqrt;
 
 public class World {
     public static void create() {
-        chainWorld();
+        softBodyWorld();
+    }
+
+    private static void softBodyWorld(){
+        Solver.newConstraint(new WindowBorderConstraint());
+        Solver.newConstraint(new MouseConstraint());
+
+        Solver.newGeneric(new SoftBody(250,250,40,30));
     }
 
     private static void clothWorld(){
@@ -52,11 +60,11 @@ public class World {
         Solver.newConstraint(new WindowBorderConstraint());
         Solver.newConstraint(new MouseConstraint());
 
-        int width = 10;
-        int height = 10;
+        int width = 5;
+        int height = 5;
         double xPos = 250;
         double yPos = 250;
-        double stepSize = VerletObject.DEFAULT_RADIUS*2;
+        double stepSize = VerletObject.DEFAULT_RADIUS*5;
         double diagonalStepSize = sqrt(pow(stepSize,2)*2);
 
         int objCount = 0;
