@@ -12,7 +12,7 @@ import static java.lang.Math.sqrt;
 
 public class World {
     public static void create() {
-        chainWorld();
+        boxWorld();
     }
 
     private static void softBodyWorld(){
@@ -64,14 +64,14 @@ public class World {
         int height = 5;
         double xPos = 250;
         double yPos = 250;
-        double stepSize = VerletObject.DEFAULT_RADIUS*5;
+        double stepSize = VerletObject.DEFAULT_RADIUS*2;
         double diagonalStepSize = sqrt(pow(stepSize,2)*2);
 
         int objCount = 0;
 
         for(int x=0;x<width;x++){
             for(int y=0;y<height;y++){
-                Solver.newObject(xPos+(x*stepSize),yPos+(y*stepSize)).setColor(255,255,255);
+                Solver.newObject(xPos+(x*stepSize),yPos+(y*stepSize)).setColor(255,255,255).setRadius(VerletObject.DEFAULT_RADIUS);
                 if(objCount!=0&&y!=0) {
                     Solver.newLink(Solver.objects[objCount - 1], Solver.objects[objCount], stepSize);
                 }
