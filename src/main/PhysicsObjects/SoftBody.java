@@ -28,15 +28,16 @@ public class SoftBody extends PhysicsGeneric{
         for(int i=0;i<segments;i++){
             double angle = (i/segments)*PI*2;
             Solver.newObject(position.getX()+cos(angle)*radius, position.getY()+sin(angle)*radius);
-            objectIds = append(objectIds, Solver.objects.length);
+            objectIds = append(objectIds, Solver.objects.length-1);
         }
     }
 
     @Override
     public void update(double dt) {
-        for(int i=0;i<objectIds.length-1;i++){
+        for(int i=0;i<objectIds.length;i++){
+            int nextI = i+1>=objectIds.length-1?0:i+1;
             VerletObject obj1 = Solver.objects[objectIds[i]];
-            VerletObject obj2 = Solver.objects[objectIds[i<objectIds.length-2?i+1:0]];
+            VerletObject obj2 = Solver.objects[objectIds[nextI]];
 
             Vector2D axis = obj1.positionCurrent.subtract(obj2.positionCurrent);
             double length = axis.getNorm();
@@ -51,7 +52,7 @@ public class SoftBody extends PhysicsGeneric{
 
     public double getArea(){
         double area = 0;
-        for(int i=0; i<objectIds.length-1;i++) {
+        for(int i=0; i<objectIds.length;i++) {
             int nextI = i+1>=objectIds.length-1?0:i+1;
 
             VerletObject obj1 = Solver.objects[objectIds[i]];

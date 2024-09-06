@@ -19,7 +19,7 @@ public class World {
         Solver.newConstraint(new WindowBorderConstraint());
         Solver.newConstraint(new MouseConstraint());
 
-        Solver.newGeneric(new SoftBody(250,250,40,30));
+        Solver.newGeneric(new SoftBody(250,250,200,20));
     }
 
     private static void clothWorld(){
