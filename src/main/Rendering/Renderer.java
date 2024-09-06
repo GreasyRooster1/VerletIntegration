@@ -11,6 +11,8 @@ import main.Solver;
 import static java.lang.Math.abs;
 
 public class Renderer {
+    public static ColorMode colorMode;
+
     public static void render(){
         renderConstraints();
         renderLinks();
@@ -48,7 +50,7 @@ public class Renderer {
 
     public static void renderVerletObjects(){
         for (VerletObject obj:Solver.objects){
-            Main.app.fill(obj.color);
+            Main.app.fill(Color.determineColor(obj,colorMode));
             Main.app.noStroke();
             Main.app.ellipse(obj.positionCurrent.getX(),obj.positionCurrent.getY(),obj.radius);
         }
