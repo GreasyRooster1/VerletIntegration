@@ -1,6 +1,6 @@
 package main.PhysicsObjects;
 
-import main.Color;
+import main.Rendering.Color;
 import main.Main;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 

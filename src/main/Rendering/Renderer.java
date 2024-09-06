@@ -1,8 +1,12 @@
-package main;
+package main.Rendering;
 
+import main.CollisionCell;
+import main.Constraint;
+import main.Main;
 import main.PhysicsObjects.Link;
 import main.PhysicsObjects.Spring;
 import main.PhysicsObjects.VerletObject;
+import main.Solver;
 
 import static java.lang.Math.abs;
 
@@ -17,7 +21,7 @@ public class Renderer {
     }
 
     public static void renderSprings(){
-        for (Spring spring:Solver.springs){
+        for (Spring spring: Solver.springs){
             float length = (float) spring.obj1.positionCurrent.subtract(spring.obj2.positionCurrent).getNorm();
             Main.app.strokeWeight(length/40f);
             Main.app.stroke(255);

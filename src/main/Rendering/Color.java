@@ -1,4 +1,6 @@
-package main;
+package main.Rendering;
+
+import main.Main;
 
 import static processing.core.PApplet.sin;
 import static processing.core.PConstants.PI;

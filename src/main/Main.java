@@ -1,5 +1,6 @@
 package main;
 
+import main.Rendering.Renderer;
 import processing.core.PApplet;
 import processing.event.MouseEvent;
 
