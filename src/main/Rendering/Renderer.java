@@ -11,7 +11,7 @@ import main.Solver;
 import static java.lang.Math.abs;
 
 public class Renderer {
-    public static ColorMode colorMode;
+    public static ColorMode colorMode = ColorMode.OBJECT_COLOR;
 
     public static void render(){
         renderConstraints();

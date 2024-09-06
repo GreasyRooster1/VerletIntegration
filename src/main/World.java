@@ -12,7 +12,7 @@ import static java.lang.Math.sqrt;
 
 public class World {
     public static void create() {
-        softBodyWorld();
+        chainWorld();
     }
 
     private static void softBodyWorld(){
