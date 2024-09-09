@@ -29,8 +29,10 @@ public class HUD {
 
         app.noFill();
         app.stroke(255);
+        app.strokeWeight(1);
         app.ellipse(250,250,75,75);
 
+        app.stroke(0,0,255);
         app.line(250,250,250+Solver.gravity.getX(),250+Solver.gravity.getY());
     }
 
