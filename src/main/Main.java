@@ -1,5 +1,6 @@
 package main;
 
+import main.Rendering.Color;
 import main.Rendering.Renderer;
 import processing.core.PApplet;
 import processing.event.MouseEvent;
@@ -50,11 +51,16 @@ public class Main extends PApplet {
 
     public void drawHUD(){
         fill(255);
-        text("FPS:"+frameRate,10,10);
-        text("Obj Count:"+Solver.objects.length,10,20);
-        text("∆t:"+dt,10,30);
-        text("timeWarp:"+timeWarp,10,40);
-        text("Max Obj Count:"+maxObjects,10,50);
+        textAlign(LEFT);
+        text("FPS:"+frameRate,3,10);
+        text("Obj Count:"+Solver.objects.length,3,20);
+        text("∆t:"+dt,3,30);
+        text("timeWarp:"+timeWarp,3,40);
+        text("Max Obj Count:"+maxObjects,3,50);
+
+        textAlign(RIGHT);
+        text("World: "+WorldManager.getCurrentWorld().getClass().getName(),497,10);
+        text("Color Mode: "+ Renderer.colorMode.name(),497,20);
     }
 
 

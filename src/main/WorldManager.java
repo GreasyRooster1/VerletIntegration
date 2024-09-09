@@ -16,7 +16,7 @@ public class WorldManager {
     public static int currentWorldId =0;
 
     public static void loadWorld() {
-        worlds[currentWorldId].load();
+        getCurrentWorld().load();
     }
 
     public static void reload(){
@@ -36,5 +36,9 @@ public class WorldManager {
         }
         reload();
         return currentWorldId;
+    }
+
+    public static World getCurrentWorld(){
+        return worlds[currentWorldId];
     }
 }
