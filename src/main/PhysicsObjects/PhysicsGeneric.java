@@ -5,7 +5,7 @@ import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 public class PhysicsGeneric {
     public Vector2D position;
 
-    PhysicsGeneric(double x, double y) {
+    protected PhysicsGeneric(double x, double y) {
         position = new Vector2D(x, y);
     }
 

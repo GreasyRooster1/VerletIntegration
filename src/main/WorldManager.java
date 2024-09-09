@@ -1,6 +1,7 @@
 package main;
 
 import main.PhysicsObjects.*;
+import main.PhysicsObjects.Generic.Spring;
 import main.Worlds.*;
 
 public class WorldManager {

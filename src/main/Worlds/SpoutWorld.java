@@ -3,7 +3,7 @@ package main.Worlds;
 
 import main.Constraints.CircularBorderConstraint;
 import main.Constraints.MouseConstraint;
-import main.PhysicsObjects.Spout;
+import main.PhysicsObjects.Generic.Spout;
 import main.Solver;
 import main.World;
 

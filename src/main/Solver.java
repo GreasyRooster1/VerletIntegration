@@ -2,12 +2,11 @@ package main;
 
 import main.PhysicsObjects.Link;
 import main.PhysicsObjects.PhysicsGeneric;
-import main.PhysicsObjects.Spring;
+import main.PhysicsObjects.Generic.Spring;
 import main.PhysicsObjects.VerletObject;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
 import static java.lang.Math.floor;
-import static java.lang.Math.pow;
 import static processing.core.PApplet.*;
 
 public class Solver {

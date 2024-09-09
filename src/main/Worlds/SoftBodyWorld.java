@@ -2,7 +2,7 @@ package main.Worlds;
 
 import main.Constraints.MouseConstraint;
 import main.Constraints.WindowBorderConstraint;
-import main.PhysicsObjects.SoftBody;
+import main.PhysicsObjects.Generic.SoftBody;
 import main.Solver;
 import main.World;
 

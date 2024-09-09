@@ -1,6 +1,8 @@
-package main.PhysicsObjects;
+package main.PhysicsObjects.Generic;
 
 
+import main.PhysicsObjects.PhysicsGeneric;
+import main.PhysicsObjects.VerletObject;
 import main.Solver;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
@@ -8,7 +10,7 @@ import static java.lang.Math.*;
 import static processing.core.PApplet.append;
 import static processing.core.PApplet.println;
 
-public class SoftBody extends PhysicsGeneric{
+public class SoftBody extends PhysicsGeneric {
     // 1.0 moles of substance, at 293.15 kelvin (room temperature, 20°C)
     public static double NRT = 1.0 * 8.3144621 * 293.15;
 

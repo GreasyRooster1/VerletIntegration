@@ -4,7 +4,7 @@ import main.CollisionCell;
 import main.Constraint;
 import main.Main;
 import main.PhysicsObjects.Link;
-import main.PhysicsObjects.Spring;
+import main.PhysicsObjects.Generic.Spring;
 import main.PhysicsObjects.VerletObject;
 import main.Solver;
 

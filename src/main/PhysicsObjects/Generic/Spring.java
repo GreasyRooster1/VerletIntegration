@@ -1,5 +1,6 @@
-package main.PhysicsObjects;
+package main.PhysicsObjects.Generic;
 
+import main.PhysicsObjects.VerletObject;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
 import static processing.core.PApplet.println;

@@ -1,9 +1,11 @@
-package main.PhysicsObjects;
+package main.PhysicsObjects.Generic;
 
+import main.PhysicsObjects.PhysicsGeneric;
+import main.PhysicsObjects.VerletObject;
 import main.Solver;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
-public class Spout extends PhysicsGeneric{
+public class Spout extends PhysicsGeneric {
     public Vector2D shootAcceleration;
     public double safeRadius = 10;
 

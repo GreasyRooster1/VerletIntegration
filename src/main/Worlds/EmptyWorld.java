@@ -1,10 +1,8 @@
 package main.Worlds;
 
 
-import main.Constraints.CircularBorderConstraint;
 import main.Constraints.MouseConstraint;
 import main.Constraints.WindowBorderConstraint;
-import main.PhysicsObjects.Spout;
 import main.Solver;
 import main.World;
 
