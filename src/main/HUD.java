@@ -18,6 +18,19 @@ public class HUD {
     }
 
     public static void render(){
+        renderText();
+        renderGravity();
+    }
+
+    public static void renderGravity(){
+        app.noFill();
+        app.stroke(255);
+        app.ellipse(250,250,75,75);
+
+        app.line(250,250,250+Solver.gravity.getX(),250+Solver.gravity.getY());
+    }
+
+    public static void renderText(){
         app.fill(255);
         app.textAlign(LEFT);
         app.text("FPS:"+app.frameRate,3,10);
