@@ -19,7 +19,7 @@ public class Main extends PApplet {
 
         frameRate(120);
         Solver.setup();
-        World.create();
+        WorldManager.loadWorld();
     }
 
     public void draw(){
