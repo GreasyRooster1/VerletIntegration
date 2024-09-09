@@ -31,8 +31,7 @@ public class Main extends PApplet {
         Solver.update(dt);
         Renderer.render();
 
-        updateMaxObjects();
-        drawHUD();
+        HUD.update();
     }
 
     public void mouseWheel(MouseEvent event) {
@@ -41,26 +40,6 @@ public class Main extends PApplet {
         if(timeWarp<0){
             timeWarp=0;
         }
-    }
-
-    public void updateMaxObjects(){
-        if(frameRate>=60){
-            maxObjects=Solver.objects.length;
-        }
-    }
-
-    public void drawHUD(){
-        fill(255);
-        textAlign(LEFT);
-        text("FPS:"+frameRate,3,10);
-        text("Obj Count:"+Solver.objects.length,3,20);
-        text("∆t:"+dt,3,30);
-        text("timeWarp:"+timeWarp,3,40);
-        text("Max Obj Count:"+maxObjects,3,50);
-
-        textAlign(RIGHT);
-        text("World: "+WorldManager.getCurrentWorld().getClass().getName(),497,10);
-        text("Color Mode: "+ Renderer.colorMode.name(),497,20);
     }
 
 

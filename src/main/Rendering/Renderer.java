@@ -1,12 +1,9 @@
 package main.Rendering;
 
-import main.CollisionCell;
-import main.Constraint;
-import main.Main;
+import main.*;
 import main.PhysicsObjects.Link;
 import main.PhysicsObjects.Generic.Spring;
 import main.PhysicsObjects.VerletObject;
-import main.Solver;
 
 import static java.lang.Math.abs;
 
