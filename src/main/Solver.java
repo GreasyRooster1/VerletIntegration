@@ -4,12 +4,20 @@ import main.PhysicsObjects.Link;
 import main.PhysicsObjects.PhysicsGeneric;
 import main.PhysicsObjects.Generic.Spring;
 import main.PhysicsObjects.VerletObject;
+import main.Worlds.BoxWorld;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
+
+import java.util.ArrayList;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static java.lang.Math.floor;
 import static processing.core.PApplet.*;
 
 public class Solver {
+    public static final int THREAD_POOL_SIZE = 10;
+
     public static VerletObject[] objects = {};
     public static Link[] links = {};
     public static Spring[] springs = {};
@@ -118,7 +126,19 @@ public class Solver {
     }
 
     public static void solveCollisions(){
-        for(int x = 0; x < collisionCells.length; x++){
+        ExecutorService executor = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
+
+        ArrayList<Runnable> threads = new ArrayList<Runnable>();
+        for (int i = 1; i <= THREAD_POOL_SIZE; i++) {
+            threads.add(new CollisionThread(i));
+        }
+
+
+    }
+
+    public static void solveCollisionSector(int sector,int maxSectors){
+        int sectorRatio = collisionCells.length/maxSectors;
+        for(int x = (sector-1)*sectorRatio; x < sector*sectorRatio; x++){
             for(int y = 0; y < collisionCells[x].length; y++){
                 CollisionCell currentCell = collisionCells[x][y];
                 for(int dx=-1; dx <= 1; dx++){
