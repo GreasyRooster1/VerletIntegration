@@ -51,7 +51,7 @@ public class Solver {
     }
 
     static void setupCollisionCells(){
-        double stepSize = VerletObject.DEFAULT_RADIUS*2;
+        double stepSize = VerletObject.MAX_RADIUS *2;
         for (int i = 0; i < Main.app.width/stepSize; i++) {
             CollisionCell[] row = {};
             for (int j = 0; j < Main.app.height/stepSize; j++) {

@@ -14,7 +14,7 @@ public class ClothWorld extends World {
 
         int width = 10;
         int height = 10;
-        double stepSize = VerletObject.DEFAULT_RADIUS*4;
+        double stepSize = VerletObject.MAX_RADIUS *4;
         double xPos = 250-(stepSize*height/2);
         double yPos = 50;
 

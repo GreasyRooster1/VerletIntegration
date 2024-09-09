@@ -13,6 +13,7 @@ public class WorldManager {
             new ClothWorld(),
             new SoftBodyWorld(),
             new GravityWorld(),
+            new TowerWorld(),
     };
 
     public static int currentWorldId =0;

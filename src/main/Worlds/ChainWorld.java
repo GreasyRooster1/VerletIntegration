@@ -16,8 +16,8 @@ public class ChainWorld extends World {
         Solver.newConstraint(new MouseConstraint());
 
         int objCount = 1;
-        double endRadius = VerletObject.DEFAULT_RADIUS;
-        float step = (float) VerletObject.DEFAULT_RADIUS*2;
+        double endRadius = VerletObject.MAX_RADIUS;
+        float step = (float) VerletObject.MAX_RADIUS *2;
         float chainHeight = Main.app.height/2f;
         float chainEnd = Main.app.width-Main.app.width/10f;
         float chainStart = Main.app.width/10f;
@@ -25,7 +25,7 @@ public class ChainWorld extends World {
         Solver.newObject(chainStart,chainHeight).setStatic(true).setRadius(endRadius).setColor(255,255,255);
 
         for (float i = chainStart+step; i < chainEnd; i+=step) {
-            Solver.newObject(i,chainHeight).setColor(255,255,255).setRadius(VerletObject.DEFAULT_RADIUS);
+            Solver.newObject(i,chainHeight).setColor(255,255,255).setRadius(VerletObject.MAX_RADIUS);
             if(objCount==1) {
                 Solver.newLink(Solver.objects[objCount - 1], Solver.objects[objCount], step/2+endRadius);
             }else {

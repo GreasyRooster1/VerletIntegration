@@ -3,7 +3,6 @@ package main.Worlds;
 
 import main.Constraints.MouseConstraint;
 import main.Constraints.WindowBorderConstraint;
-import main.Main;
 import main.PhysicsObjects.VerletObject;
 import main.Solver;
 import main.World;
@@ -22,14 +21,14 @@ public class BoxWorld extends World {
         int height = 5;
         double xPos = 250;
         double yPos = 250;
-        double stepSize = VerletObject.DEFAULT_RADIUS*2;
+        double stepSize = VerletObject.MAX_RADIUS *2;
         double diagonalStepSize = sqrt(pow(stepSize,2)*2);
 
         int objCount = 0;
 
         for(int x=0;x<width;x++){
             for(int y=0;y<height;y++){
-                Solver.newObject(xPos+(x*stepSize),yPos+(y*stepSize)).setColor(255,255,255).setRadius(VerletObject.DEFAULT_RADIUS);
+                Solver.newObject(xPos+(x*stepSize),yPos+(y*stepSize)).setColor(255,255,255).setRadius(VerletObject.MAX_RADIUS);
                 if(objCount!=0&&y!=0) {
                     Solver.newLink(Solver.objects[objCount - 1], Solver.objects[objCount], stepSize);
                 }
