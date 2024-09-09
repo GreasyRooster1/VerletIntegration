@@ -11,9 +11,21 @@ public class Input {
     public static Vector2D startLoc = Vector2D.ZERO;
     public static double safeRadius = 10;
 
+
     public static void getInput(){
         getMouse();
         getKeyboard();
+        doGravity();
+    }
+
+    public static void doGravity(){
+        if(Main.app.keyPressed) {
+            if (Main.app.key == 'g') {
+                Solver.gravity = new Vector2D(Main.app.mouseX-250, Main.app.mouseY-250).scalarMultiply(8);
+
+
+            }
+        }
     }
 
     public static void getKeyboard(){
