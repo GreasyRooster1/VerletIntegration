@@ -25,6 +25,9 @@ public class Input {
             if(Main.app.key=='w'){
                 WorldManager.cycle();
             }
+            if(Main.app.key=='r'){
+                WorldManager.reload();
+            }
         }
 
         keyPrevPressed = Main.app.keyPressed;
