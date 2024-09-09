@@ -23,6 +23,10 @@ public class HUD {
     }
 
     public static void renderGravity(){
+        if (!(Main.app.keyPressed&&Main.app.key=='g')) {
+            return;
+        }
+
         app.noFill();
         app.stroke(255);
         app.ellipse(250,250,75,75);

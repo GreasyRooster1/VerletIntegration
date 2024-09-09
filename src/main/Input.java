@@ -22,8 +22,6 @@ public class Input {
         if(Main.app.keyPressed) {
             if (Main.app.key == 'g') {
                 Solver.gravity = new Vector2D(Main.app.mouseX-250, Main.app.mouseY-250).scalarMultiply(8);
-
-
             }
         }
     }
