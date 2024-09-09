@@ -22,9 +22,8 @@ public class Input {
                 int index = Renderer.colorMode.ordinal() >= ColorMode.values().length-1?0:Renderer.colorMode.ordinal()+1;
                 Renderer.colorMode = ColorMode.values()[index];
             }
-            if(Main.app.key=='c'){
-                int index = Renderer.colorMode.ordinal() >= ColorMode.values().length-1?0:Renderer.colorMode.ordinal()+1;
-                Renderer.colorMode = ColorMode.values()[index];
+            if(Main.app.key=='w'){
+                WorldManager.cycle();
             }
         }
 

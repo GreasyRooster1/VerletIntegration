@@ -31,9 +31,10 @@ public class WorldManager {
 
     public static int cycle(){
         currentWorldId++;
-        if(currentWorldId >= worlds.length-1){
+        if(currentWorldId >= worlds.length){
             currentWorldId = 0;
         }
+        reload();
         return currentWorldId;
     }
 }
