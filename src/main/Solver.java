@@ -20,7 +20,8 @@ public class Solver {
 
     public static int subSteps = 8;
 
-    public static Vector2D gravity = new Vector2D(0, 1000);
+    public static final Vector2D DEFAULT_GRAVITY = new Vector2D(0, 1000);
+    public static Vector2D gravity = DEFAULT_GRAVITY;
 
     public static VerletObject newObject(double x, double y){
         VerletObject o = new VerletObject(x,y);

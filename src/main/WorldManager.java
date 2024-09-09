@@ -12,6 +12,7 @@ public class WorldManager {
             new BoxWorld(),
             new ClothWorld(),
             new SoftBodyWorld(),
+            new GravityWorld(),
     };
 
     public static int currentWorldId =0;
@@ -26,6 +27,8 @@ public class WorldManager {
         Solver.springs = new Spring[]{};
         Solver.constraints = new Constraint[]{};
         Solver.generics = new PhysicsGeneric[]{};
+
+        Solver.gravity = Solver.DEFAULT_GRAVITY;
 
         loadWorld();
     }
