@@ -23,7 +23,7 @@ public class DeterministicWorld extends World {
 
         Solver.newConstraint(new WindowBorderConstraint());
 
-        Solver.newGeneric(new ImageSpout(10,10).setShootAcceleration(700_000,0).setData("resources/data.json"));
+        Solver.newGeneric(new ImageSpout(15,15).setShootAcceleration(700_000,0).setData("resources/data.json"));
     }
 
     public static void saveJSON(){

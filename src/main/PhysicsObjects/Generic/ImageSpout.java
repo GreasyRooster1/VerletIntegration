@@ -1,5 +1,6 @@
 package main.PhysicsObjects.Generic;
 
+import main.Main;
 import main.PhysicsObjects.PhysicsGeneric;
 import main.PhysicsObjects.VerletObject;
 import main.Solver;
@@ -22,6 +23,9 @@ public class ImageSpout extends PhysicsGeneric {
     }
 
     public void update(double dt){
+        if(Solver.objects.length>=colorData.length){
+            return;
+        }
         for(VerletObject obj: Solver.objects){
             FastVec2 collisionAxis = obj.positionCurrent.sub(position);
             double dist = collisionAxis.getLength();
@@ -30,6 +34,7 @@ public class ImageSpout extends PhysicsGeneric {
             }
         }
         VerletObject obj = Solver.newObject(position.x, position.y).setRadius(radius);
+        obj.setColor(Main.app.red(colorData[Solver.objects.length-1]),Main.app.green(colorData[Solver.objects.length-1]),Main.app.blue(colorData[Solver.objects.length-1]));
         obj.setAcceleration(shootAcceleration);
     }
 
