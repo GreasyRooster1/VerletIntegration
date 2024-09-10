@@ -29,7 +29,7 @@ public class ImageSpout extends PhysicsGeneric {
                 return;
             }
         }
-        VerletObject obj = Solver.newObject(position.x, position.y);
+        VerletObject obj = Solver.newObject(position.x, position.y).setRadius(radius);
         obj.setAcceleration(shootAcceleration);
     }
 
@@ -51,7 +51,7 @@ public class ImageSpout extends PhysicsGeneric {
     public ImageSpout setData(String path){
         JSONArray values = loadJSONArray(new File(path));
 
-        colorData = new int[values.size()]
+        colorData = new int[values.size()];
 
         for (int i = 0; i < values.size(); i++) {
 
@@ -61,5 +61,6 @@ public class ImageSpout extends PhysicsGeneric {
 
             colorData[i] = color;
         }
+        return this;
     }
 }
