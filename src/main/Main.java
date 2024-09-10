@@ -4,6 +4,7 @@ import main.Rendering.Color;
 import main.Rendering.Renderer;
 import processing.core.PApplet;
 import processing.event.MouseEvent;
+import main.Worlds.DeterministicWorld;
 
 public class Main extends PApplet {
     public static Main app;

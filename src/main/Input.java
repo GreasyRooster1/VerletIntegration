@@ -4,6 +4,7 @@ import main.PhysicsObjects.VerletObject;
 import main.Rendering.ColorMode;
 import main.Rendering.Renderer;
 import main.Util.FastVec2;
+import main.Worlds.DeterministicWorld;
 
 public class Input {
     public static boolean mousePrevPressed = false;
@@ -40,6 +41,9 @@ public class Input {
             }
             if(Main.app.key=='d'){
                 HUD.debugActive = !HUD.debugActive;
+            }
+            if(Main.app.key=='s'){
+                DeterministicWorld.saveJSON();
             }
         }
 
