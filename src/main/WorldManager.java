@@ -14,6 +14,7 @@ public class WorldManager {
             new SoftBodyWorld(),
             new GravityWorld(),
             new TowerWorld(),
+            new DeterministicWorld(),
     };
 
     public static int currentWorldId =0;
