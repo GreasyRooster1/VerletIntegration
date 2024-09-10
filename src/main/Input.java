@@ -38,6 +38,9 @@ public class Input {
             if(Main.app.key=='r'){
                 WorldManager.reload();
             }
+            if(Main.app.key=='d'){
+                HUD.debugActive = !HUD.debugActive;
+            }
         }
 
         keyPrevPressed = Main.app.keyPressed;

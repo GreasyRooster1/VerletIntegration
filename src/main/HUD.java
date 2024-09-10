@@ -6,9 +6,17 @@ import static main.Main.*;
 import static processing.core.PConstants.LEFT;
 
 public class HUD {
+    public static boolean debugActive = false;
+
     public static void update() {
         render();
         updateMaxObjects();
+    }
+
+    public static void render(){
+        renderText();
+        renderGravity();
+        renderDebug();
     }
 
     public static void updateMaxObjects(){
@@ -17,9 +25,11 @@ public class HUD {
         }
     }
 
-    public static void render(){
-        renderText();
-        renderGravity();
+    public static void renderDebug(){
+        if(!debugActive){
+            return;
+        }
+        Renderer.renderCollisionCells();
     }
 
     public static void renderGravity(){
