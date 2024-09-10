@@ -4,7 +4,7 @@ package main.PhysicsObjects.Generic;
 import main.PhysicsObjects.PhysicsGeneric;
 import main.PhysicsObjects.VerletObject;
 import main.Solver;
-import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
+import main.Util.FastVec2;
 
 import static java.lang.Math.*;
 import static processing.core.PApplet.append;
@@ -29,7 +29,7 @@ public class SoftBody extends PhysicsGeneric {
     public void init(double radius,double segments){
         for(int i=0;i<segments;i++){
             double angle = (i/segments)*PI*2;
-            Solver.newObject(position.getX()+cos(angle)*radius, position.getY()+sin(angle)*radius);
+            Solver.newObject(position.x+cos(angle)*radius, position.y+sin(angle)*radius);
             objectIds = append(objectIds, Solver.objects.length-1);
         }
     }
@@ -41,14 +41,14 @@ public class SoftBody extends PhysicsGeneric {
             VerletObject obj1 = Solver.objects[objectIds[i]];
             VerletObject obj2 = Solver.objects[objectIds[nextI]];
 
-            Vector2D axis = obj1.positionCurrent.subtract(obj2.positionCurrent);
-            double length = axis.getNorm();
+            FastVec2 axis = obj1.positionCurrent.sub(obj2.positionCurrent);
+            double length = axis.getLength();
 
             double forceAmount = (length*NRT) / getArea() * 1000;
-            Vector2D normalizedForceVector = axis.normalize();
+            FastVec2 normalizedForceVector = axis.normalized();
 
-            obj1.applyForce(normalizedForceVector.scalarMultiply(forceAmount));
-            obj2.applyForce(normalizedForceVector.scalarMultiply(-forceAmount));
+            obj1.applyForce(normalizedForceVector.scalarMult(forceAmount));
+            obj2.applyForce(normalizedForceVector.scalarMult(-forceAmount));
         }
     }
 
@@ -60,10 +60,10 @@ public class SoftBody extends PhysicsGeneric {
             VerletObject obj1 = Solver.objects[objectIds[i]];
             VerletObject obj2 = Solver.objects[objectIds[nextI]];
 
-            area += obj1.positionCurrent.getY() *
-                    obj2.positionCurrent.getX() -
-                    obj1.positionCurrent.getX() *
-                            obj2.positionCurrent.getY();
+            area += obj1.positionCurrent.y *
+                    obj2.positionCurrent.x -
+                    obj1.positionCurrent.x *
+                            obj2.positionCurrent.y;
         }
         return area * 0.5;
     }

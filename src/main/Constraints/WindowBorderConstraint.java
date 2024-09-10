@@ -3,7 +3,7 @@ package main.Constraints;
 import main.Constraint;
 import main.Main;
 import main.PhysicsObjects.VerletObject;
-import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
+import main.Util.FastVec2;
 
 import static java.lang.Math.max;
 import static java.lang.Math.min;
@@ -12,9 +12,9 @@ import static java.lang.Math.min;
 public class WindowBorderConstraint extends Constraint{
 
     public void apply(VerletObject obj){
-        obj.positionCurrent = new Vector2D(
-                min(max(obj.positionCurrent.getX(),obj.radius),Main.app.width-obj.radius),
-                min(max(obj.positionCurrent.getY(),obj.radius),Main.app.height-obj.radius));
+        obj.positionCurrent = new FastVec2(
+                min(max(obj.positionCurrent.x,obj.radius),Main.app.width-obj.radius),
+                min(max(obj.positionCurrent.y,obj.radius),Main.app.height-obj.radius));
     }
 
     public void render(){

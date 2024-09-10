@@ -1,12 +1,12 @@
 package main.PhysicsObjects;
 
-import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
+import main.Util.FastVec2;
 
 public class PhysicsGeneric {
-    public Vector2D position;
+    public FastVec2 position;
 
     public PhysicsGeneric(double x, double y) {
-        position = new Vector2D(x, y);
+        position = new FastVec2(x, y);
     }
 
     public void update(double dt){
@@ -14,7 +14,7 @@ public class PhysicsGeneric {
     }
 
     public PhysicsGeneric setPosition(double x, double y) {
-        position = new Vector2D(x, y);
+        position = new FastVec2(x, y);
         return this;
     }
 }

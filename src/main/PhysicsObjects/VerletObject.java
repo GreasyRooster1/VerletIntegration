@@ -2,7 +2,7 @@ package main.PhysicsObjects;
 
 import main.Rendering.Color;
 import main.Main;
-import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
+import main.Util.FastVec2;
 
 import java.util.UUID;
 
@@ -11,10 +11,10 @@ import static processing.core.PApplet.println;
 public class VerletObject {
     public final UUID ID;
 
-    public final Vector2D initalPosition;
-    public Vector2D positionCurrent;
-    public Vector2D positionOld;
-    public Vector2D acceleration = Vector2D.ZERO;
+    public final FastVec2 initalPosition;
+    public FastVec2 positionCurrent;
+    public FastVec2 positionOld;
+    public FastVec2 acceleration = FastVec2.ZERO;
     public boolean isStatic = false;
 
     public int color;
@@ -25,9 +25,9 @@ public class VerletObject {
     public double mass = 1;
 
     public VerletObject(double x, double y) {
-        positionCurrent = new Vector2D(x, y);
-        positionOld = new Vector2D(x, y);
-        initalPosition = new Vector2D(x, y);
+        positionCurrent = new FastVec2(x, y);
+        positionOld = new FastVec2(x, y);
+        initalPosition = new FastVec2(x, y);
 
         color = Color.getRainbow(Main.app.frameCount/100f);
 
@@ -38,29 +38,29 @@ public class VerletObject {
 
     public void updatePosition(double dt){
         if(isStatic){
-            acceleration = Vector2D.ZERO;
+            acceleration = FastVec2.ZERO;
             positionCurrent = initalPosition;
             return;
         }
-        Vector2D velocity = getVelocity();
+        FastVec2 velocity = getVelocity();
 
-        positionOld = new Vector2D(1,positionCurrent);
-        positionCurrent = positionCurrent.add(velocity.add(acceleration.scalarMultiply(dt*dt)));
+        positionOld = positionCurrent.clone();
+        positionCurrent = positionCurrent.add(velocity.add(acceleration.scalarMult(dt*dt)));
 
-        //positionCurrent = new Vector2D(positionCurrent.getX()%Main.app.width,positionCurrent.getY()%Main.app.height);
+        //positionCurrent = new FastVec2(positionCurrent.getX()%Main.app.width,positionCurrent.getY()%Main.app.height);
 
-        acceleration = new Vector2D(0,0);
+        acceleration = new FastVec2(0,0);
     }
 
-    public Vector2D getVelocity(){
-        return positionCurrent.subtract(positionOld);
+    public FastVec2 getVelocity(){
+        return positionCurrent.sub(positionOld);
     }
 
-    public void accelerate(Vector2D acc) {
+    public void accelerate(FastVec2 acc) {
         acceleration = acceleration.add(acc);
     }
-    public void applyForce(Vector2D force) {
-        acceleration = acceleration.add(force.scalarMultiply(1/mass));
+    public void applyForce(FastVec2 force) {
+        acceleration = acceleration.add(force.scalarMult(1/mass));
     }
 
     public VerletObject setStatic(boolean isStatic) {
@@ -76,8 +76,8 @@ public class VerletObject {
         return this;
     }
 
-    public VerletObject setAcceleration(Vector2D vector2D) {
-        acceleration = vector2D;
+    public VerletObject setAcceleration(FastVec2 FastVec2) {
+        acceleration = FastVec2;
         return this;
     }
 }

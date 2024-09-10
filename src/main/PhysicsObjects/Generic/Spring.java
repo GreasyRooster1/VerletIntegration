@@ -1,7 +1,7 @@
 package main.PhysicsObjects.Generic;
 
 import main.PhysicsObjects.VerletObject;
-import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
+import main.Util.FastVec2;
 
 import static processing.core.PApplet.println;
 
@@ -22,20 +22,20 @@ public class Spring {
     }
 
     public void apply(){
-        Vector2D axis = obj1.positionCurrent.subtract(obj2.positionCurrent);
-        double dist = axis.getNorm();
+        FastVec2 axis = obj1.positionCurrent.sub(obj2.positionCurrent);
+        double dist = axis.getLength();
 
         double deformAmount = dist - restLength;
 
         double restorativeForce = stiffness * deformAmount;
 
-        Vector2D force = axis.normalize().scalarMultiply(restorativeForce);
+        FastVec2 force = axis.normalized().scalarMult(restorativeForce);
 
 
-        obj1.applyForce(force.scalarMultiply(-1));
+        obj1.applyForce(force.scalarMult(-1));
         obj2.applyForce(force);
 
-        obj1.applyForce(force.scalarMultiply(damping));
-        obj2.applyForce(force.scalarMultiply(-damping));
+        obj1.applyForce(force.scalarMult(damping));
+        obj2.applyForce(force.scalarMult(-damping));
     }
 }

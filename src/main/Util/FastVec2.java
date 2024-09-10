@@ -2,9 +2,9 @@ package main.Util;
 
 import org.apache.commons.math3.exception.MathArithmeticException;
 import org.apache.commons.math3.exception.util.LocalizedFormats;
-import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
 public class FastVec2 {
+    public static final FastVec2 ZERO = new FastVec2(0, 0);
     public final double x,y;
 
     public FastVec2(double x, double y) {
@@ -47,5 +47,9 @@ public class FastVec2 {
 
     public FastVec2 negate(){
         return new FastVec2(-x,-y);
+    }
+
+    public FastVec2 clone(){
+        return new FastVec2(x,y);
     }
 }

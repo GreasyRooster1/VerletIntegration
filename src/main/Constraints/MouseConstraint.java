@@ -3,7 +3,7 @@ package main.Constraints;
 import main.Constraint;
 import main.Main;
 import main.PhysicsObjects.VerletObject;
-import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
+import main.Util.FastVec2;
 
 import static java.lang.Math.max;
 
@@ -15,13 +15,13 @@ public class MouseConstraint extends Constraint{
             return;
         }
 
-        Vector2D center = new Vector2D(Main.app.mouseX,Main.app.mouseY);
-        Vector2D collisionAxis = center.subtract(obj.positionCurrent);
-        double dist = max(collisionAxis.getNorm(),0.001);
+        FastVec2 center = new FastVec2(Main.app.mouseX,Main.app.mouseY);
+        FastVec2 collisionAxis = center.sub(obj.positionCurrent);
+        double dist = max(collisionAxis.getLength(),0.001);
         if(dist < radius+obj.radius){
-            Vector2D n =  new Vector2D(collisionAxis.getX()/dist, collisionAxis.getY()/dist);
+            FastVec2 n =  new FastVec2(collisionAxis.x/dist, collisionAxis.y/dist);
             double delta = radius+obj.radius - dist;
-            obj.positionCurrent = obj.positionCurrent.subtract(n.scalarMultiply(delta));
+            obj.positionCurrent = obj.positionCurrent.sub(n.scalarMult(delta));
 
         }
     }

@@ -3,12 +3,12 @@ package main;
 import main.PhysicsObjects.VerletObject;
 import main.Rendering.ColorMode;
 import main.Rendering.Renderer;
-import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
+import main.Util.FastVec2;
 
 public class Input {
     public static boolean mousePrevPressed = false;
     public static boolean keyPrevPressed = false;
-    public static Vector2D startLoc = Vector2D.ZERO;
+    public static FastVec2 startLoc = FastVec2.ZERO;
     public static double safeRadius = 10;
 
 
@@ -21,7 +21,7 @@ public class Input {
     public static void doGravity(){
         if(Main.app.keyPressed) {
             if (Main.app.key == 'g') {
-                Solver.gravity = new Vector2D(Main.app.mouseX-250, Main.app.mouseY-250).scalarMultiply(8);
+                Solver.gravity = new FastVec2(Main.app.mouseX-250, Main.app.mouseY-250).scalarMult(8);
             }
         }
     }
@@ -48,25 +48,25 @@ public class Input {
 
     public static void getMouse(){
         if(Main.app.mousePressed&&!mousePrevPressed){
-            startLoc = new Vector2D(Main.app.mouseX,Main.app.mouseY);
+            startLoc = new FastVec2(Main.app.mouseX,Main.app.mouseY);
             mousePrevPressed = true;
             return;
         }
 
         if(Main.app.mousePressed){
-            if(startLoc.getX()==Main.app.mouseX&&startLoc.getY()==Main.app.mouseY){
+            if(startLoc.x==Main.app.mouseX&&startLoc.y==Main.app.mouseY){
                 return;
             }
             for(VerletObject obj:Solver.objects){
-                Vector2D collisionAxis = obj.positionCurrent.subtract(startLoc);
-                double dist = collisionAxis.getNorm();
+                FastVec2 collisionAxis = obj.positionCurrent.sub(startLoc);
+                double dist = collisionAxis.getLength();
                 if(dist < safeRadius+obj.radius){
                     return;
                 }
             }
-            double x = Main.app.mouseX-startLoc.getX();
-            double y = Main.app.mouseY-startLoc.getY();
-            Solver.newObject(startLoc.getX(),startLoc.getY()).setAcceleration(new Vector2D(x,y).scalarMultiply(1500));
+            double x = Main.app.mouseX-startLoc.x;
+            double y = Main.app.mouseY-startLoc.y;
+            Solver.newObject(startLoc.x,startLoc.y).setAcceleration(new FastVec2(x,y).scalarMult(1500));
         }
 
         mousePrevPressed = Main.app.mousePressed;

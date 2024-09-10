@@ -43,7 +43,7 @@ public class HUD {
         app.ellipse(250,250,75,75);
 
         app.stroke(0,0,255);
-        app.line(250,250,250+Solver.gravity.getX(),250+Solver.gravity.getY());
+        app.line(250,250,250+Solver.gravity.x,250+Solver.gravity.y);
     }
 
     public static void renderText(){

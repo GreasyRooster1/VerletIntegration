@@ -3,7 +3,7 @@ package main.PhysicsObjects.Generic;
 import main.PhysicsObjects.PhysicsGeneric;
 import main.PhysicsObjects.VerletObject;
 import main.Solver;
-import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
+import main.Util.FastVec2;
 
 import static java.lang.Math.min;
 
@@ -19,11 +19,11 @@ public class NewtonianGravity extends PhysicsGeneric {
 
     public void update(double dt){
         for(VerletObject obj: Solver.objects){
-            Vector2D axis = position.subtract(obj.positionCurrent);
-            double dist = axis.getNorm();
+            FastVec2 axis = position.sub(obj.positionCurrent);
+            double dist = axis.getLength();
             double force =  (G*mass*obj.mass)/(dist*dist);
 
-            obj.applyForce(axis.normalize().scalarMultiply(min(force,MAX_FORCE)));
+            obj.applyForce(axis.normalized().scalarMult(min(force,MAX_FORCE)));
         }
     }
 }

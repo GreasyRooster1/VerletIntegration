@@ -3,10 +3,10 @@ package main.PhysicsObjects.Generic;
 import main.PhysicsObjects.PhysicsGeneric;
 import main.PhysicsObjects.VerletObject;
 import main.Solver;
-import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
+import main.Util.FastVec2;
 
 public class Spout extends PhysicsGeneric {
-    public Vector2D shootAcceleration;
+    public FastVec2 shootAcceleration;
     public double safeRadius = 10;
 
     public Spout(double x,double y) {
@@ -15,18 +15,18 @@ public class Spout extends PhysicsGeneric {
 
     public void update(double dt){
         for(VerletObject obj: Solver.objects){
-            Vector2D collisionAxis = obj.positionCurrent.subtract(position);
-            double dist = collisionAxis.getNorm();
+            FastVec2 collisionAxis = obj.positionCurrent.sub(position);
+            double dist = collisionAxis.getLength();
             if(dist < safeRadius+obj.radius){
                 return;
             }
         }
-        VerletObject obj = Solver.newObject(position.getX(), position.getY());
+        VerletObject obj = Solver.newObject(position.x, position.y);
         obj.setAcceleration(shootAcceleration);
     }
 
     public Spout setShootAcceleration(double x, double y) {
-        shootAcceleration = new Vector2D(x, y);
+        shootAcceleration = new FastVec2(x, y);
         return this;
     }
 

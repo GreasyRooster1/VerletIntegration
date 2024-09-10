@@ -1,6 +1,7 @@
 package main.PhysicsObjects;
 
-import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
+
+import main.Util.FastVec2;
 
 public class Link {
     public VerletObject obj1;
@@ -15,11 +16,11 @@ public class Link {
     }
 
     public void apply(){
-        Vector2D axis = obj1.positionCurrent.subtract(obj2.positionCurrent);
-        double dist = axis.getNorm();
-        Vector2D n = new Vector2D(axis.getX()/dist, axis.getY()/dist);
+        FastVec2 axis = obj1.positionCurrent.sub(obj2.positionCurrent);
+        double dist = axis.getLength();
+        FastVec2 n = new FastVec2(axis.x/dist, axis.y/dist);
         double delta = targetDist - dist;
-        obj1.positionCurrent = obj1.positionCurrent.add(n.scalarMultiply(delta*0.5));
-        obj2.positionCurrent = obj2.positionCurrent.subtract(n.scalarMultiply(delta*0.5));
+        obj1.positionCurrent = obj1.positionCurrent.add(n.scalarMult(delta*0.5));
+        obj2.positionCurrent = obj2.positionCurrent.sub(n.scalarMult(delta*0.5));
     }
 }

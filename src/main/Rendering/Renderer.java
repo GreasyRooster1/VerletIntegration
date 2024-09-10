@@ -21,10 +21,10 @@ public class Renderer {
 
     public static void renderSprings(){
         for (Spring spring: Solver.springs){
-            float length = (float) spring.obj1.positionCurrent.subtract(spring.obj2.positionCurrent).getNorm();
+            float length = (float) spring.obj1.positionCurrent.sub(spring.obj2.positionCurrent).getLength();
             Main.app.strokeWeight(length/40f);
             Main.app.stroke(255);
-            Main.app.line(spring.obj1.positionCurrent.getX(),spring.obj1.positionCurrent.getY(),spring.obj2.positionCurrent.getX(),spring.obj2.positionCurrent.getY());
+            Main.app.line(spring.obj1.positionCurrent.x,spring.obj1.positionCurrent.y,spring.obj2.positionCurrent.x,spring.obj2.positionCurrent.y);
         }
     }
 
@@ -49,7 +49,7 @@ public class Renderer {
         for (VerletObject obj:Solver.objects){
             Main.app.fill(Color.determineColor(obj,colorMode));
             Main.app.noStroke();
-            Main.app.ellipse(obj.positionCurrent.getX(),obj.positionCurrent.getY(),obj.radius);
+            Main.app.ellipse(obj.positionCurrent.x,obj.positionCurrent.y,obj.radius);
         }
     }
 
@@ -57,7 +57,7 @@ public class Renderer {
         for (Link link:Solver.links){
             Main.app.strokeWeight(3);
             Main.app.stroke(255);
-            Main.app.line(link.obj1.positionCurrent.getX(),link.obj1.positionCurrent.getY(),link.obj2.positionCurrent.getX(),link.obj2.positionCurrent.getY());
+            Main.app.line(link.obj1.positionCurrent.x,link.obj1.positionCurrent.y,link.obj2.positionCurrent.x,link.obj2.positionCurrent.y);
         }
     }
 }

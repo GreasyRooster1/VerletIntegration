@@ -4,8 +4,8 @@ import main.PhysicsObjects.Link;
 import main.PhysicsObjects.PhysicsGeneric;
 import main.PhysicsObjects.Generic.Spring;
 import main.PhysicsObjects.VerletObject;
+import main.Util.FastVec2;
 import main.Worlds.BoxWorld;
-import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
@@ -29,8 +29,8 @@ public class Solver {
 
     public static int subSteps = 8;
 
-    public static final Vector2D DEFAULT_GRAVITY = new Vector2D(0, 1000);
-    public static Vector2D gravity = DEFAULT_GRAVITY;
+    public static final FastVec2 DEFAULT_GRAVITY = new FastVec2(0, 1000);
+    public static FastVec2 gravity = DEFAULT_GRAVITY;
 
     public static VerletObject newObject(double x, double y){
         VerletObject o = new VerletObject(x,y);
@@ -157,14 +157,14 @@ public class Solver {
     }
 
     public static void solveCollisionBetweenObjects(VerletObject obj1, VerletObject obj2){
-        Vector2D collisionAxis = obj1.positionCurrent.subtract(obj2.positionCurrent);
-        double dist = collisionAxis.getNorm();
+        FastVec2 collisionAxis = obj1.positionCurrent.sub(obj2.positionCurrent);
+        double dist = collisionAxis.getLength();
         if(dist < obj1.radius+obj2.radius){
-            Vector2D n =  new Vector2D(collisionAxis.getX()/dist, collisionAxis.getY()/dist);
+            FastVec2 n =  new FastVec2(collisionAxis.x/dist, collisionAxis.y/dist);
             double delta = obj1.radius+obj2.radius - dist;
-            Vector2D diff = n.scalarMultiply(delta).scalarMultiply(.5);
+            FastVec2 diff = n.scalarMult(delta).scalarMult(.5);
             obj1.positionCurrent = obj1.positionCurrent.add(diff);
-            obj2.positionCurrent = obj2.positionCurrent.subtract(diff);
+            obj2.positionCurrent = obj2.positionCurrent.sub(diff);
 
         }
     }
@@ -181,8 +181,8 @@ public class Solver {
         resetCollisionCells();
         int count = 0;
         for (VerletObject obj:objects) {
-            int i = (int) floor(obj.positionCurrent.getX()/CollisionCell.CELL_SIZE);
-            int j = (int) floor(obj.positionCurrent.getY()/CollisionCell.CELL_SIZE);
+            int i = (int) floor(obj.positionCurrent.x/CollisionCell.CELL_SIZE);
+            int j = (int) floor(obj.positionCurrent.y/CollisionCell.CELL_SIZE);
 
             i = max(0,min((int) floor(Main.app.width/CollisionCell.CELL_SIZE)-1,i));
             j = max(0,min((int) floor(Main.app.height/CollisionCell.CELL_SIZE)-1,j));
