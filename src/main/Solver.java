@@ -127,26 +127,7 @@ public class Solver {
     }
 
     public static void solveCollisions(){
-        ExecutorService executor = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
-
-        ArrayList<Callable<Integer>> threads = new ArrayList<>();
-        for (int i = 1; i <= THREAD_POOL_SIZE; i++) {
-            threads.add(new CollisionThread(i));
-        }
-
-        try {
-            executor.invokeAny(threads);
-        }catch (InterruptedException e){
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
-    public static void solveCollisionSector(int sector,int maxSectors){
-        int sectorRatio = collisionCells.length/maxSectors;
-        for(int x = (sector-1)*sectorRatio; x < sector*sectorRatio; x++){
+        for(int x = 0; x < collisionCells.length; x++){
             for(int y = 0; y < collisionCells[x].length; y++){
                 CollisionCell currentCell = collisionCells[x][y];
                 for(int dx=-1; dx <= 1; dx++){
