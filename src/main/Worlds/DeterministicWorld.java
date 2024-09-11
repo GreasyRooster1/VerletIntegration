@@ -13,6 +13,8 @@ import processing.core.PImage;
 import processing.data.JSONArray;
 import processing.data.JSONObject;
 
+import static java.lang.Math.sin;
+
 
 public class DeterministicWorld extends World {
     public static PImage image;
@@ -25,7 +27,7 @@ public class DeterministicWorld extends World {
 
         Solver.newConstraint(new WindowBorderConstraint());
 
-        Solver.newGeneric(new ImageSpout(15,15).setShootAcceleration(700_000,0).setData("resources/data.json"));
+        Solver.newGeneric(new ImageSpout(250,15).setShootAcceleration(0,250_000).setData("resources/data.json"));
     }
 
     public static void saveJSON(){

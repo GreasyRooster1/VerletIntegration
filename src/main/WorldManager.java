@@ -34,6 +34,8 @@ public class WorldManager {
 
         Solver.constantDeltaTime = false;
 
+        Solver.worldTime = 0;
+
         loadWorld();
     }
 

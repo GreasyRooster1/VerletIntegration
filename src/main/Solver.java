@@ -14,6 +14,8 @@ public class Solver {
 
     public static boolean constantDeltaTime = false;
 
+    public static int worldTime = 0;
+
     public static VerletObject[] objects = {};
     public static Link[] links = {};
     public static Spring[] springs = {};
@@ -80,6 +82,8 @@ public class Solver {
             solveCollisions();
 
             updatePositions(subDt);
+
+            worldTime++;
         }
     }
 

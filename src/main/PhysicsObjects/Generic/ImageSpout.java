@@ -10,6 +10,7 @@ import processing.data.JSONObject;
 
 import java.io.File;
 
+import static java.lang.Math.sin;
 import static processing.core.PApplet.loadJSONArray;
 
 public class ImageSpout extends PhysicsGeneric {
@@ -33,6 +34,9 @@ public class ImageSpout extends PhysicsGeneric {
                 return;
             }
         }
+
+        shootAcceleration = new FastVec2(sin(Solver.worldTime/100d)*250_000,shootAcceleration.y);
+
         VerletObject obj = Solver.newObject(position.x, position.y).setRadius(radius);
         obj.setColor(Main.app.red(colorData[Solver.objects.length-1]),Main.app.green(colorData[Solver.objects.length-1]),Main.app.blue(colorData[Solver.objects.length-1]));
         obj.setAcceleration(shootAcceleration);
