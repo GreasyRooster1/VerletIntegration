@@ -19,10 +19,10 @@ public class BoxWorld extends World {
 
         int width = 5;
         int height = 5;
-        double xPos = 250;
-        double yPos = 250;
         double stepSize = VerletObject.MAX_RADIUS *2;
         double diagonalStepSize = sqrt(pow(stepSize,2)*2);
+        double xPos = 250-stepSize/2*width;
+        double yPos = 250-stepSize/2*height;
 
         int objCount = 0;
 
