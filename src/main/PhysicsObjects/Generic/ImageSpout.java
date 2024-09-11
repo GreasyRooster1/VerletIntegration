@@ -25,7 +25,9 @@ public class ImageSpout extends PhysicsGeneric {
 
     public void update(double dt){
         if(Solver.objects.length>=colorData.length){
-            return;
+            if(!(Main.app.keyPressed&&Main.app.key=='z')) {
+                return;
+            }
         }
         for(VerletObject obj: Solver.objects){
             FastVec2 collisionAxis = obj.positionCurrent.sub(position);
@@ -35,10 +37,12 @@ public class ImageSpout extends PhysicsGeneric {
             }
         }
 
-        shootAcceleration = new FastVec2(sin(Solver.worldTime/100d)*250_000,shootAcceleration.y);
-
         VerletObject obj = Solver.newObject(position.x, position.y).setRadius(radius);
-        obj.setColor(Main.app.red(colorData[Solver.objects.length-1]),Main.app.green(colorData[Solver.objects.length-1]),Main.app.blue(colorData[Solver.objects.length-1]));
+        if(Solver.objects.length>=colorData.length){
+            obj.setColor(255,0,255);
+        }else {
+            obj.setColor(Main.app.red(colorData[Solver.objects.length - 1]), Main.app.green(colorData[Solver.objects.length - 1]), Main.app.blue(colorData[Solver.objects.length - 1]));
+        }
         obj.setAcceleration(shootAcceleration);
     }
 
