@@ -43,6 +43,7 @@ public class DeterministicWorld extends World {
             int color = image.get(x,y);
 
             jsonObject.setInt("color",color);
+            jsonObject.setDouble("radius",object.radius);
 
             values.setJSONObject(i, jsonObject);
         }

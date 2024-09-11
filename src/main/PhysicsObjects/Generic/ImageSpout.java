@@ -18,6 +18,7 @@ public class ImageSpout extends PhysicsGeneric {
     public double safeRadius = 10;
     public double radius = VerletObject.MAX_RADIUS;
     public int[] colorData;
+    public double[] sizeData;
 
     public ImageSpout(double x, double y) {
         super(x,y);
@@ -37,11 +38,17 @@ public class ImageSpout extends PhysicsGeneric {
             }
         }
 
-        VerletObject obj = Solver.newObject(position.x, position.y).setRadius(radius);
+        VerletObject obj = Solver.newObject(position.x, position.y);
         if(Solver.objects.length>=colorData.length){
             obj.setColor(255,0,255);
         }else {
             obj.setColor(Main.app.red(colorData[Solver.objects.length - 1]), Main.app.green(colorData[Solver.objects.length - 1]), Main.app.blue(colorData[Solver.objects.length - 1]));
+
+        }
+        if(Solver.objects.length>=sizeData.length){
+            obj.setRadius(Main.app.random(3F, (float) VerletObject.MAX_RADIUS));
+        }else{
+            obj.setRadius(sizeData[Solver.objects.length - 1]);
         }
         obj.setAcceleration(shootAcceleration);
     }
@@ -65,14 +72,17 @@ public class ImageSpout extends PhysicsGeneric {
         JSONArray values = loadJSONArray(new File(path));
 
         colorData = new int[values.size()];
+        sizeData = new double[values.size()];
 
         for (int i = 0; i < values.size(); i++) {
 
             JSONObject dataPoint = values.getJSONObject(i);
 
             int color = dataPoint.getInt("color");
+            int radius = dataPoint.getInt("radius");
 
             colorData[i] = color;
+            sizeData[i] = radius;
         }
         return this;
     }
