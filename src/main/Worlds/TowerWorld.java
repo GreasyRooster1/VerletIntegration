@@ -15,11 +15,10 @@ public class TowerWorld extends World {
         Solver.newConstraint(new WindowBorderConstraint());
         Solver.newConstraint(new MouseConstraint());
 
-        int stackSize = 20;
+        int stackSize = 25;
         double size = VerletObject.MAX_RADIUS;
-        double ratio = (double) (Main.app.height-100) /stackSize;
-        for(int i=1;i<stackSize;i++){
-            Solver.newObject(250,500-i*ratio).setRadius(size);
+        for(int i=0;i<stackSize;i++){
+            Solver.newObject(250,500-i*size*2).setRadius(size);
         }
     }
 }
