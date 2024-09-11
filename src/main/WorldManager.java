@@ -32,6 +32,8 @@ public class WorldManager {
 
         Solver.gravity = Solver.DEFAULT_GRAVITY;
 
+        Solver.constantDeltaTime = false;
+
         loadWorld();
     }
 

@@ -21,6 +21,8 @@ public class DeterministicWorld extends World {
     public void load() {
         image = Main.app.loadImage("resources/image.jpg");
 
+        Solver.constantDeltaTime = true;
+
         Solver.newConstraint(new WindowBorderConstraint());
 
         Solver.newGeneric(new ImageSpout(15,15).setShootAcceleration(700_000,0).setData("resources/data.json"));

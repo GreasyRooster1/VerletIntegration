@@ -5,19 +5,14 @@ import main.PhysicsObjects.PhysicsGeneric;
 import main.PhysicsObjects.Generic.Spring;
 import main.PhysicsObjects.VerletObject;
 import main.Util.FastVec2;
-import main.Worlds.BoxWorld;
-
-import java.util.ArrayList;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import static java.lang.Math.floor;
 import static processing.core.PApplet.*;
 
 public class Solver {
     public static final int THREAD_POOL_SIZE = 10;
+
+    public static boolean constantDeltaTime = false;
 
     public static VerletObject[] objects = {};
     public static Link[] links = {};
@@ -71,9 +66,9 @@ public class Solver {
     }
 
     static void update(double dt){
-        double subDt = dt/subSteps;
+        double subDt = getDeltaTime(dt)/subSteps;
         for(int i = 0; i < subSteps; i++) {
-            updateGenerics(dt);
+            updateGenerics(subDt);
 
             applyGravity();
 
@@ -191,5 +186,15 @@ public class Solver {
             cell.objectIndices = append(cell.objectIndices,count);
             count++;
         }
+    }
+
+    static double getDeltaTime(double dt){
+        if(constantDeltaTime) {
+            Main.app.frameRate(60);
+            return 1/60d;
+        }else{
+            Main.app.frameRate(120);
+        }
+        return dt;
     }
 }
