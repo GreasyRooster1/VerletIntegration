@@ -17,8 +17,8 @@ public class BoxWorld extends World {
         Solver.newConstraint(new WindowBorderConstraint());
         Solver.newConstraint(new MouseConstraint());
 
-        int width = 10;
-        int height = 10;
+        int width = 5;
+        int height = 5;
         double xPos = 250;
         double yPos = 250;
         double stepSize = VerletObject.MAX_RADIUS *2;
@@ -44,5 +44,8 @@ public class BoxWorld extends World {
                 objCount++;
             }
         }
+
+        VerletObject obj = Solver.newObject(250,1).setRadius(1).setStatic(true);
+        Solver.newLink(obj,Solver.objects[objCount/2], 250);
     }
 }
