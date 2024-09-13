@@ -32,7 +32,7 @@ public class SoftBody extends PhysicsGeneric {
     public void init(double radius,double segments){
         for(int i=0;i<segments;i++){
             double angle = (i/segments)*PI*2;
-            Solver.newObject(position.x+cos(angle)*radius, position.y+sin(angle)*radius);
+            Solver.newObject(position.x+cos(angle)*radius, position.y+sin(angle)*radius).setRadius(4);
 
             objectIds = append(objectIds, Solver.objects.length-1);
         }
@@ -40,7 +40,7 @@ public class SoftBody extends PhysicsGeneric {
             VerletObject obj1 = Solver.objects[objectIds[i]];
             int nextI = i+1>=objectIds.length?0:i+1;
             VerletObject obj2 = Solver.objects[nextI];
-            Solver.newSpring(obj1,obj2,40,3000);
+            Solver.newSpring(obj1,obj2,(radius*2*PI)/segments,3000);
         }
     }
 
@@ -55,7 +55,7 @@ public class SoftBody extends PhysicsGeneric {
             FastVec2 axis = center.sub(obj1.positionCurrent);
             double length = axis.getLength();
 
-            double pressure = (NRT / getArea())*100000;
+            double pressure = (NRT / getArea())*200000;
             FastVec2 normalizedForceVector = axis.normalized();
 
             FastVec2 force = normalizedForceVector.scalarMult(pressure);

@@ -40,7 +40,5 @@ public class Spring {
         FastVec2 dampingForce = obj1.getVelocity().sub(obj2.getVelocity()).scalarMult(damping);
         obj1.applyForce(dampingForce.scalarMult(-1));
         obj2.applyForce(dampingForce);
-
-        println(force.toString(),dampingForce.toString());
     }
 }

@@ -12,6 +12,6 @@ public class SoftBodyWorld extends World {
         Solver.newConstraint(new WindowBorderConstraint());
         Solver.newConstraint(new MouseConstraint());
 
-        Solver.newGeneric(new SoftBody(250,250,200,20));
+        Solver.newGeneric(new SoftBody(250,250,50,40));
     }
 }
