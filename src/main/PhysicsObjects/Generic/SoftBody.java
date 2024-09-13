@@ -17,6 +17,8 @@ public class SoftBody extends PhysicsGeneric {
 
     public int[] objectIds = {};
 
+    public FastVec2 center = FastVec2.ZERO;
+
     SoftBody(double x, double y) {
         super(x, y);
         init(20,20);
@@ -31,29 +33,51 @@ public class SoftBody extends PhysicsGeneric {
         for(int i=0;i<segments;i++){
             double angle = (i/segments)*PI*2;
             Solver.newObject(position.x+cos(angle)*radius, position.y+sin(angle)*radius);
+
             objectIds = append(objectIds, Solver.objects.length-1);
+        }
+        for(int i=0;i<objectIds.length;i++) {
+            VerletObject obj1 = Solver.objects[objectIds[i]];
+            int nextI = i+1>=objectIds.length?0:i+1;
+            VerletObject obj2 = Solver.objects[nextI];
+            Solver.newSpring(obj1,obj2,40,3000);
         }
     }
 
     @Override
     public void update(double dt) {
+        getCenter();
         for(int i=0;i<objectIds.length;i++){
             int nextI = i+1>=objectIds.length?0:i+1;
             VerletObject obj1 = Solver.objects[objectIds[i]];
             VerletObject obj2 = Solver.objects[objectIds[nextI]];
 
-            FastVec2 axis = obj1.positionCurrent.sub(obj2.positionCurrent);
+            FastVec2 axis = center.sub(obj1.positionCurrent);
             double length = axis.getLength();
 
-            double forceAmount = (length*NRT) / getArea() * 100;
+            double pressure = (NRT / getArea())*100000;
             FastVec2 normalizedForceVector = axis.normalized();
 
-            obj1.applyForce(normalizedForceVector.scalarMult(forceAmount));
-            obj2.applyForce(normalizedForceVector.scalarMult(-forceAmount));
+            FastVec2 force = normalizedForceVector.scalarMult(pressure);
 
-            Main.app.stroke(255);
-            Main.app.line(obj1.positionCurrent.x,obj1.positionCurrent.y,obj2.positionCurrent.x,obj2.positionCurrent.y);
+            obj1.applyForce(force);
+
+//            Main.app.stroke(255);
+//            Main.app.line(obj1.positionCurrent.x,obj1.positionCurrent.y,obj2.positionCurrent.x,obj2.positionCurrent.y);
         }
+    }
+
+    public void getCenter(){
+        double x = 0;
+        double y = 0;
+        for(int i=0;i<objectIds.length;i++){
+            VerletObject obj = Solver.objects[objectIds[i]];
+            x+=obj.positionCurrent.x;
+            y+=obj.positionCurrent.y;
+        }
+        x/=objectIds.length;
+        y/=objectIds.length;
+        center = new FastVec2(x, y);
     }
 
     public double getArea(){

@@ -52,4 +52,8 @@ public class FastVec2 {
     public FastVec2 clone(){
         return new FastVec2(x,y);
     }
+
+    public String toString(){
+        return x+", "+y;
+    }
 }

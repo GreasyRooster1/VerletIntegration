@@ -11,7 +11,7 @@ public class Spring {
 
     public double restLength;
     public double stiffness;
-    public double damping = 0.01;
+    public double damping = 1000;
 
     public Spring(VerletObject obj1, VerletObject obj2, double restLength, double stiffness) {
         this.obj1 = obj1;
@@ -35,7 +35,12 @@ public class Spring {
         obj1.applyForce(force.scalarMult(-1));
         obj2.applyForce(force);
 
-        obj1.applyForce(force.scalarMult(damping));
-        obj2.applyForce(force.scalarMult(-damping));
+
+
+        FastVec2 dampingForce = obj1.getVelocity().sub(obj2.getVelocity()).scalarMult(damping);
+        obj1.applyForce(dampingForce.scalarMult(-1));
+        obj2.applyForce(dampingForce);
+
+        println(force.toString(),dampingForce.toString());
     }
 }

@@ -60,7 +60,7 @@ public class VerletObject {
         acceleration = acceleration.add(acc);
     }
     public void applyForce(FastVec2 force) {
-        acceleration = acceleration.add(force.scalarMult(1/mass));
+        acceleration = acceleration.add(force.scalarDiv(mass));
     }
 
     public VerletObject setStatic(boolean isStatic) {
