@@ -1,6 +1,7 @@
 package main.PhysicsObjects.Generic;
 
 
+import main.Main;
 import main.PhysicsObjects.PhysicsGeneric;
 import main.PhysicsObjects.VerletObject;
 import main.Solver;
@@ -37,18 +38,21 @@ public class SoftBody extends PhysicsGeneric {
     @Override
     public void update(double dt) {
         for(int i=0;i<objectIds.length;i++){
-            int nextI = i+1>=objectIds.length-1?0:i+1;
+            int nextI = i+1>=objectIds.length?0:i+1;
             VerletObject obj1 = Solver.objects[objectIds[i]];
             VerletObject obj2 = Solver.objects[objectIds[nextI]];
 
             FastVec2 axis = obj1.positionCurrent.sub(obj2.positionCurrent);
             double length = axis.getLength();
 
-            double forceAmount = (length*NRT) / getArea() * 1000;
+            double forceAmount = (length*NRT) / getArea() * 100;
             FastVec2 normalizedForceVector = axis.normalized();
 
             obj1.applyForce(normalizedForceVector.scalarMult(forceAmount));
             obj2.applyForce(normalizedForceVector.scalarMult(-forceAmount));
+
+            Main.app.stroke(255);
+            Main.app.line(obj1.positionCurrent.x,obj1.positionCurrent.y,obj2.positionCurrent.x,obj2.positionCurrent.y);
         }
     }
 

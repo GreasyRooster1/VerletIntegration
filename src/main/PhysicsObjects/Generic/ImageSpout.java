@@ -25,11 +25,6 @@ public class ImageSpout extends PhysicsGeneric {
     }
 
     public void update(double dt){
-        if(Solver.objects.length>=colorData.length){
-            if(!(Main.app.keyPressed&&Main.app.key=='z')) {
-                return;
-            }
-        }
         for(VerletObject obj: Solver.objects){
             FastVec2 collisionAxis = obj.positionCurrent.sub(position);
             double dist = collisionAxis.getLength();
@@ -46,7 +41,7 @@ public class ImageSpout extends PhysicsGeneric {
 
         }
         if(Solver.objects.length>=sizeData.length){
-            obj.setRadius(Main.app.random(3F, (float) VerletObject.MAX_RADIUS));
+            obj.setRadius(Main.app.random(1)>0.5?4:5);
         }else{
             obj.setRadius(sizeData[Solver.objects.length - 1]);
         }
