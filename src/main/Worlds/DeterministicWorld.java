@@ -21,7 +21,7 @@ public class DeterministicWorld extends World {
 
     @Override
     public void load() {
-        image = Main.app.loadImage("resources/image.jpg");
+        image = Main.app.loadImage("resources/img.jpg");
 
         Solver.constantDeltaTime = true;
 
@@ -37,12 +37,12 @@ public class DeterministicWorld extends World {
             JSONObject jsonObject = new JSONObject();
             VerletObject object = Solver.objects[i];
 
-            int x = (int) ((object.positionCurrent.x/Main.app.width)*image.width);
-            int y = (int) ((object.positionCurrent.y/Main.app.height)*image.height);
+            double u = ((object.positionCurrent.x/Main.app.width));
+            double v = ((object.positionCurrent.y/Main.app.height));
 
-            int color = image.get(x,y);
 
-            jsonObject.setInt("color",color);
+            jsonObject.setDouble("u",u);
+            jsonObject.setDouble("v",v);
             jsonObject.setDouble("radius",object.radius);
 
             values.setJSONObject(i, jsonObject);

@@ -75,6 +75,10 @@ public class VerletObject {
         this.color = Main.app.color(r,g,b);
         return this;
     }
+    public VerletObject setColor(int c) {
+        this.color = Main.app.color(Main.app.red(c),Main.app.green(c),Main.app.blue(c));
+        return this;
+    }
 
     public VerletObject setAcceleration(FastVec2 FastVec2) {
         acceleration = FastVec2;
