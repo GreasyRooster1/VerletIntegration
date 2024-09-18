@@ -19,6 +19,7 @@ public class ClothWorld extends World {
         double yPos = 50;
 
         double stiffness = 10000;
+        double springLength = stepSize;
 
 
         int objCount = 0;
@@ -32,10 +33,10 @@ public class ClothWorld extends World {
                 }
 
                 if(objCount!=0&&y!=0) {
-                    Solver.newSpring(Solver.objects[objCount - 1], Solver.objects[objCount], stepSize,stiffness);
+                    Solver.newSpring(Solver.objects[objCount - 1], Solver.objects[objCount], springLength,stiffness);
                 }
                 if(x!=0){
-                    Solver.newSpring(Solver.objects[objCount], Solver.objects[objCount-(height)], stepSize,stiffness);
+                    Solver.newSpring(Solver.objects[objCount], Solver.objects[objCount-(height)], springLength,stiffness);
                 }
                 objCount++;
             }

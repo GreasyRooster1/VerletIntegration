@@ -12,6 +12,7 @@ import processing.data.JSONObject;
 
 import java.io.File;
 
+import static java.lang.Math.round;
 import static java.lang.Math.sin;
 import static main.Worlds.DeterministicWorld.image;
 import static processing.core.PApplet.loadJSONArray;
@@ -47,7 +48,7 @@ public class ImageSpout extends PhysicsGeneric {
             obj.setColor(image.get((int) (uData[index]*image.width), (int) (vData[index]*image.height)));
         }
         if(Solver.objects.length>=sizeData.length){
-            obj.setRadius(Main.app.random(1)>0.5?4:5);
+            obj.setRadius(round(Main.app.random(4,5)));
         }else{
             obj.setRadius(sizeData[index]);
         }

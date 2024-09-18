@@ -21,7 +21,7 @@ public class DeterministicWorld extends World {
 
     @Override
     public void load() {
-        image = Main.app.loadImage("resources/img.jpg");
+        image = Main.app.loadImage("resources/dwil.png");
 
         Solver.constantDeltaTime = true;
 
