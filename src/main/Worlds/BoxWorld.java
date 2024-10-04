@@ -44,8 +44,5 @@ public class BoxWorld extends World {
                 objCount++;
             }
         }
-
-        VerletObject obj = Solver.newObject(250,1).setRadius(1).setStatic(true);
-        Solver.newLink(obj,Solver.objects[objCount/2], 250);
     }
 }

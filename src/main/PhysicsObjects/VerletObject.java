@@ -29,7 +29,7 @@ public class VerletObject {
         positionOld = new FastVec2(x, y);
         initalPosition = new FastVec2(x, y);
 
-        color = Color.getRainbow(Main.app.frameCount/100f);
+        color = Color.getRainbow(Main.app.frameCount/300f);
 
         radius = Main.app.random(2f, (float) MAX_RADIUS);
 
