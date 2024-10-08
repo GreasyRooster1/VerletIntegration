@@ -1,13 +1,16 @@
 package main.Worlds;
 
 
+import main.Constraints.CircleConstraint;
 import main.Constraints.MouseConstraint;
 import main.Constraints.WindowBorderConstraint;
 import main.Main;
 import main.PhysicsObjects.Generic.ImageSpout;
+import main.PhysicsObjects.Generic.NewtonianGravity;
 import main.PhysicsObjects.Generic.Spout;
 import main.PhysicsObjects.VerletObject;
 import main.Solver;
+import main.Util.FastVec2;
 import main.World;
 import processing.core.PImage;
 import processing.data.JSONArray;
@@ -26,6 +29,10 @@ public class DeterministicWorld extends World {
         Solver.constantDeltaTime = true;
 
         Solver.newConstraint(new WindowBorderConstraint());
+
+        Solver.newConstraint(new CircleConstraint(0,Main.app.height,25));
+        Solver.newConstraint(new CircleConstraint(Main.app.width,Main.app.height,25));
+        Solver.newConstraint(new CircleConstraint(Main.app.width/2,Main.app.height/2,5));
 
         Solver.newGeneric(new ImageSpout(250,-1).setShootAcceleration(1,0).setData("resources/data.json"));
     }
